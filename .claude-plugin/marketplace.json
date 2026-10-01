@@ -1,0 +1,21 @@
+{
+  "name": "openoutbound",
+  "owner": {
+    "name": "OpenOutbound"
+  },
+  "metadata": {
+    "description": "The open-source AI SDR engine any agent can drive."
+  },
+  "plugins": [
+    {
+      "name": "openoutbound",
+      "source": "./",
+      "description": "Outbound skill plus an MCP connection to your OpenOutbound engine: find and research leads, watch signals, run email and LinkedIn campaigns, triage replies, get reports.",
+      "version": "0.1.0",
+      "license": "Apache-2.0",
+      "homepage": "https://github.com/xyluxx/openoutbound",
+      "keywords": ["sales", "outbound", "ai-sdr", "cold-email", "linkedin", "mcp"],
+      "category": "productivity"
+    }
+  ]
+}

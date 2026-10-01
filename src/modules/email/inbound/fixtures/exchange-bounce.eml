@@ -1,0 +1,35 @@
+From: postmaster@corp.example.org
+To: sam@brand.example.com
+Subject: Undeliverable: Quick question
+Message-ID: <ndr-exchange-1@corp.example.org>
+Date: Mon, 21 Sep 2026 15:08:00 +0000
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="exchange_ndr"
+
+--exchange_ndr
+Content-Type: text/plain; charset="us-ascii"
+
+Delivery has failed to these recipients or groups:
+
+lena@corp.example.org
+The e-mail address you entered couldn't be found. Please check the recipient's e-mail address and try to resend the message.
+
+Diagnostic information for administrators:
+
+Generating server: EXCH01.corp.example.org
+
+lena@corp.example.org
+Remote Server returned '550 5.1.1 RESOLVER.ADR.RecipNotFound; not found'
+
+--exchange_ndr
+Content-Type: message/rfc822
+
+From: Sam Carter <sam@brand.example.com>
+To: lena@corp.example.org
+Subject: Quick question
+Message-ID: <orig-exchange@brand.example.com>
+Date: Mon, 21 Sep 2026 15:07:00 +0000
+
+Hi Lena, short note.
+
+--exchange_ndr--

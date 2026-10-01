@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-27T13:30:00Z",
+  "title": "Design System: OpenOutbound brand images",
+  "extensions": {
+    "colorMeta": {
+      "dark-bg": { "role": "neutral", "displayName": "Night Page", "canonical": "#0a0a0b" },
+      "dark-bg-github": {
+        "role": "neutral",
+        "displayName": "GitHub Night Page",
+        "canonical": "#0d1117"
+      },
+      "dark-fg": { "role": "neutral", "displayName": "Dark Ink", "canonical": "#ededef" },
+      "dark-fg-2": { "role": "neutral", "displayName": "Dark Second Ink", "canonical": "#8f8f99" },
+      "dark-fg-code": { "role": "neutral", "displayName": "Dark Code Ink", "canonical": "#b4b4bc" },
+      "dark-panel": { "role": "neutral", "displayName": "Night Panel", "canonical": "#111113" },
+      "dark-panel-top": {
+        "role": "neutral",
+        "displayName": "Night Panel Top",
+        "canonical": "#151518"
+      },
+      "dark-wire": { "role": "neutral", "displayName": "Dark Wire", "canonical": "#5a5a62" },
+      "dark-green": {
+        "role": "status",
+        "displayName": "Done Green (dark)",
+        "canonical": "#3dd68c",
+        "tonalRamp": [
+          "#0b2a1b",
+          "#11452c",
+          "#18613e",
+          "#1f7e50",
+          "#2a9c63",
+          "#3dd68c",
+          "#86e7b8",
+          "#d2f7e5"
+        ]
+      },
+      "dark-amber": {
+        "role": "status",
+        "displayName": "Waiting Amber (dark)",
+        "canonical": "#f5b03d",
+        "tonalRamp": [
+          "#2e1f05",
+          "#4d3408",
+          "#6d4a0c",
+          "#8e6010",
+          "#b27a16",
+          "#f5b03d",
+          "#f9cf87",
+          "#fdeed3"
+        ]
+      },
+      "light-bg": { "role": "neutral", "displayName": "Paper White", "canonical": "#ffffff" },
+      "light-fg": { "role": "neutral", "displayName": "Light Ink", "canonical": "#1d1d1f" },
+      "light-fg-2": {
+        "role": "neutral",
+        "displayName": "Light Second Ink",
+        "canonical": "#6e6e73"
+      },
+      "light-fg-code": {
+        "role": "neutral",
+        "displayName": "Light Code Ink",
+        "canonical": "#4a4a50"
+      },
+      "light-line": { "role": "neutral", "displayName": "Light Hairline", "canonical": "#e8e8ed" },
+      "light-line-strong": {
+        "role": "neutral",
+        "displayName": "Light Strong Hairline",
+        "canonical": "#d2d2d7"
+      },
+      "light-sunk": { "role": "neutral", "displayName": "Light Sunk", "canonical": "#f5f5f7" },
+      "light-wire": { "role": "neutral", "displayName": "Light Wire", "canonical": "#8e8e93" },
+      "light-green": {
+        "role": "status",
+        "displayName": "Done Green (light)",
+        "canonical": "#1e8e4e",
+        "tonalRamp": [
+          "#082814",
+          "#0e4222",
+          "#145d30",
+          "#1e8e4e",
+          "#3aa96a",
+          "#6fc494",
+          "#a9dcbf",
+          "#e2f4ea"
+        ]
+      },
+      "light-amber": {
+        "role": "status",
+        "displayName": "Waiting Amber (light)",
+        "canonical": "#c47a00",
+        "tonalRamp": [
+          "#2e1c00",
+          "#4d2f00",
+          "#7a4b00",
+          "#c47a00",
+          "#e0981f",
+          "#eeb85c",
+          "#f6d69e",
+          "#fcf1dd"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The promise, two centered lines. 72px on the social card."
+      },
+      "lockup": { "displayName": "Lockup", "purpose": "Mark plus name." },
+      "lead": { "displayName": "Lead", "purpose": "One line under the headline, in second ink." },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Diagram items, modules, gate title, column heads (600 for heads)."
+      },
+      "body": { "displayName": "Body", "purpose": "Results and descriptions." },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Pills, chips, footers, status lines. The 14px floor."
+      },
+      "code": { "displayName": "Code", "purpose": "Real tool names only." }
+    },
+    "shadows": [
+      {
+        "name": "panel-dark",
+        "value": "0 24px 48px -20px rgb(0 0 0 / 0.55)",
+        "purpose": "Under the one main panel in dark."
+      },
+      {
+        "name": "panel-light",
+        "value": "0 1px 2px rgb(0 0 0 / 0.04), 0 8px 16px -8px rgb(0 0 0 / 0.08), 0 32px 64px -24px rgb(0 0 0 / 0.16)",
+        "purpose": "Under the one main panel in light; separates white from white."
+      },
+      {
+        "name": "chip",
+        "value": "0 1px 2px rgb(0 0 0 / 0.06)",
+        "purpose": "Filled gate check chips."
+      }
+    ],
+    "motion": [],
+    "breakpoints": [{ "name": "canvas", "value": "1280px" }]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The human's approval. One per image.",
+      "html": "<span class=\"ds-btn-primary\">Approve</span>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; height: 32px; padding: 0 14px; border-radius: 8px; background: #ededef; color: #0a0a0b; font-family: Geist, ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 500; cursor: default; transition: background 0.15s; } .ds-btn-primary:hover { background: #ffffff; } .ds-btn-primary:focus-visible { outline: 2px solid #ededef; outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "The quieter choice beside the approval.",
+      "html": "<span class=\"ds-btn-secondary\">Review drafts</span>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; height: 32px; padding: 0 14px; border-radius: 8px; border: 1px solid rgb(255 255 255 / 0.14); color: #ededef; font-family: Geist, ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 500; transition: border-color 0.15s; } .ds-btn-secondary:hover { border-color: rgb(255 255 255 / 0.3); } .ds-btn-secondary:focus-visible { outline: 2px solid #ededef; outline-offset: 2px; }"
+    },
+    {
+      "name": "Door Pill",
+      "kind": "chip",
+      "refersTo": "pill-door",
+      "description": "Outlined pill naming a door: MCP server, Agent Skill, REST API, CLI.",
+      "html": "<span class=\"ds-pill-door\">MCP server</span>",
+      "css": ".ds-pill-door { display: inline-block; padding: 3px 10px; border: 1px solid rgb(255 255 255 / 0.14); border-radius: 999px; background: #0d1117; color: #ededef; font-family: Geist, ui-sans-serif, system-ui, sans-serif; font-size: 14px; }"
+    },
+    {
+      "name": "Check Chip",
+      "kind": "chip",
+      "refersTo": "chip-check",
+      "description": "Filled chip naming a safety gate check. Never outlined.",
+      "html": "<span class=\"ds-chip-check\">Approvals</span>",
+      "css": ".ds-chip-check { display: inline-block; padding: 3px 10px; border-radius: 999px; background: rgb(255 255 255 / 0.07); box-shadow: 0 1px 2px rgb(0 0 0 / 0.06); color: #ededef; font-family: Geist, ui-sans-serif, system-ui, sans-serif; font-size: 14px; }"
+    },
+    {
+      "name": "Session Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "The one bright object: head row, graded fill, edge light, panel shadow.",
+      "html": "<div class=\"ds-panel\"><div class=\"ds-panel-head\"><span>Northwind Analytics</span><span class=\"ds-live\">Connected over MCP</span></div><div class=\"ds-step\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7.25\" fill=\"rgb(61 214 140 / 0.14)\" stroke=\"#3dd68c\" stroke-width=\"1.5\"/><path d=\"M5 8.25 7 10.25 11 6\" fill=\"none\" stroke=\"#3dd68c\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg><code>find_leads</code><span>48 people at 31 companies fit your ICP</span></div></div>",
+      "css": ".ds-panel { position: relative; width: 560px; padding-bottom: 10px; border: 1px solid rgb(255 255 255 / 0.08); border-radius: 16px; background: linear-gradient(180deg, #161b23, #12161d 140px); box-shadow: 0 24px 48px -20px rgb(0 0 0 / 0.55); color: #ededef; font-family: Geist, ui-sans-serif, system-ui, sans-serif; } .ds-panel::before { content: \"\"; position: absolute; top: -1px; left: 16%; right: 16%; height: 1px; background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.55), transparent); } .ds-panel-head { display: flex; justify-content: space-between; align-items: center; height: 48px; padding: 0 20px; border-bottom: 1px solid rgb(255 255 255 / 0.08); font-size: 14px; font-weight: 500; } .ds-live { display: flex; align-items: center; gap: 8px; color: #8f8f99; font-weight: 400; } .ds-live::before { content: \"\"; width: 6px; height: 6px; border-radius: 50%; background: #3dd68c; } .ds-step { display: grid; grid-template-columns: 16px 140px 1fr; column-gap: 14px; align-items: center; height: 44px; padding: 0 20px; font-size: 15px; } .ds-step code { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14.5px; color: #b4b4bc; }"
+    },
+    {
+      "name": "Approval Row",
+      "kind": "custom",
+      "refersTo": "approval-row",
+      "description": "The last step: sunk inset row, amber status, the ask, and the two buttons.",
+      "html": "<div class=\"ds-approval\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7.5\" fill=\"rgb(245 176 61 / 0.16)\"/><circle cx=\"8\" cy=\"8\" r=\"3.5\" fill=\"#f5b03d\"/></svg><code>launch_campaign</code><div><strong>Waiting for your approval</strong><span>Nothing is sent until you approve.</span></div></div>",
+      "css": ".ds-approval { display: grid; grid-template-columns: 16px 160px 1fr; column-gap: 14px; align-items: center; padding: 14px 10px; border: 1px solid rgb(255 255 255 / 0.08); border-radius: 12px; background: rgb(255 255 255 / 0.035); color: #ededef; font-family: Geist, ui-sans-serif, system-ui, sans-serif; } .ds-approval code { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14.5px; color: #b4b4bc; } .ds-approval strong { display: block; font-size: 16px; font-weight: 500; } .ds-approval span { display: block; margin-top: 2px; font-size: 15px; color: #8f8f99; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Console",
+    "overview": "The images look like a premium developer tool caught at a calm moment. The owner chose the canon: dark sits next to Linear and Vercel, light sits next to Apple and Notion. Premium, minimal, crisp type, lots of empty space, and light effects you notice only when they are gone.\n\nEvery image shows the real product, not a metaphor. The hero is one agent session that ends at a human approval. The diagram is the real engine with its real doors, gate and plug-ins. All names and numbers are true to the code; demo data uses the sandbox workspaces (Northwind Analytics, Brightsmile Dental Supply).\n\nColor is almost absent. Ink, gray and hairlines carry the whole layout. The only hues are two status colors, and they mean something every time they appear.",
+    "keyCharacteristics": [
+      "Monochrome, with green and amber as status only.",
+      "Geist for words, Geist Mono only for real tool names and code.",
+      "One light source in dark; soft offset shadows in light.",
+      "One large panel as the brightest object on the canvas.",
+      "Every image ships in a dark and a light variant (the social card is dark only)."
+    ],
+    "rules": [
+      {
+        "name": "The Status Only Rule",
+        "body": "Green means done or live. Amber means waiting on a person. Nothing else gets a hue: no accent color, no colored links, no tinted headings.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Edge Rule",
+        "body": "A dark README image must melt into GitHub's dark page (#0d1117). Render dark README images with bg=github, and keep every light effect inside the frame so no glow reaches the border. Light images are white on white for the same reason.",
+        "section": "colors"
+      },
+      {
+        "name": "The 14px Floor Rule",
+        "body": "No text below 14px on a 1280px canvas. README images are shown at about 70 percent, so 14px lands near 10px on screen. That is the smallest size that stays readable.",
+        "section": "typography"
+      },
+      {
+        "name": "The Real Names Rule",
+        "body": "Geist Mono is only for real tool names and code (find_leads, launch_campaign). Never use it for labels, numbers or decoration.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Light Rule",
+        "body": "One light source per dark image, from above, fully inside the frame. No second glow, no colored light.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Offset Shadow Rule",
+        "body": "Shadows always have a y offset and a blur. No flat outlines pretending to be shadows, no glows.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Wire Grammar Rule",
+        "body": "Solid wires are doors, the ways in. Dotted wires are optional plug-ins. Outlined pills name doors; filled chips name gate checks. Never swap them.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do use only the tokens in tokens.css, and ship every README image in dark and light.",
+      "Do render dark README images with bg=github so they have no edge on GitHub's dark page (#0d1117).",
+      "Do keep text at 14px or larger on the 1280px canvas.",
+      "Do keep green for done or live and amber for waiting on a person.",
+      "Do use Geist Mono only for real tool names and code.",
+      "Do use solid wires and outlined pills for doors, dotted wires for plug-ins, filled chips for gate checks.",
+      "Do make the main panel the brightest object, with one light source above it in dark.",
+      "Do keep every string true to the product, with invented names and example.com domains for demo data."
+    ],
+    "donts": [
+      "Don't add an accent hue, a brand gradient or colored light.",
+      "Don't use gradient text. Gradients exist only as light: the room light, the edge light and the panel grade.",
+      "Don't use glass or backdrop blur.",
+      "Don't use eyebrow labels (small caps or tracked uppercase above a heading). Headings are plain sentence case.",
+      "Don't let any glow or shadow touch the image border.",
+      "Don't use a shadow without offset and blur, or any glow.",
+      "Don't redraw, rotate, outline or color the mark.",
+      "Don't use the em dash character anywhere."
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "watch_id": 50001,
+    "kind": "entity",
+    "dataset": "person",
+    "run_id": 64200,
+    "delivered_at": "2026-09-18T07:40:00.000000Z",
+    "summary": { "delivered": 2, "total_count": 2 },
+    "payload_delivery": { "type": "inline" }
+  },
+  "results": [
+    {
+      "changes": [
+        {
+          "field": "experience.employment_details.current",
+          "type": "added",
+          "new_elements": [
+            {
+              "title": "VP Sales",
+              "name": "Globex Example",
+              "start_date": "2026-09-01T00:00:00+00:00"
+            }
+          ]
+        }
+      ],
+      "record": {
+        "crustdata_person_id": 900001,
+        "professional_network_profile_url": "https://www.linkedin.com/in/jordan-example",
+        "basic_profile": { "name": "Jordan Example" }
+      }
+    },
+    {
+      "changes": [{ "field": "basic_profile.headline", "type": "changed", "from": "a", "to": "b" }],
+      "record": {
+        "crustdata_person_id": 900002,
+        "professional_network_profile_url": "https://www.linkedin.com/in/casey-example",
+        "basic_profile": { "name": "Casey Example" }
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "items": [
+    {
+      "results": {
+        "firstname": "Dana",
+        "lastname": "Rivers",
+        "emails": [
+          {
+            "email": "drivers@brightsmile.example.com",
+            "certainty": "probable",
+            "mxProvider": "google"
+          },
+          {
+            "email": "Dana.Rivers@brightsmile.example.com",
+            "certainty": "ultra_sure",
+            "mxProvider": "google"
+          }
+        ]
+      },
+      "status": "DEBITED",
+      "_id": "p_exampleSearch0001"
+    }
+  ],
+  "total": 1
+}

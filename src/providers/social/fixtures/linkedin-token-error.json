@@ -1,0 +1,4 @@
+{
+  "error": "invalid_request",
+  "error_description": "Unable to retrieve access token: authorization code not found"
+}

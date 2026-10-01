@@ -1,0 +1,6 @@
+{
+  "status": 401,
+  "serviceErrorCode": 65601,
+  "code": "REVOKED_ACCESS_TOKEN",
+  "message": "The token used in the request has been revoked by the user"
+}

@@ -1,0 +1,6 @@
+{
+  "status": 422,
+  "type": "errors/cannot_resend_yet",
+  "title": "Cannot resend yet",
+  "detail": "The invitation limit was reached for this account."
+}

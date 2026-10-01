@@ -1,0 +1,7 @@
+{
+  "object": "list",
+  "data": [
+    { "id": "example-local:8b", "object": "model", "created": 1790000000, "owned_by": "library" },
+    { "id": "example-embed", "object": "model", "created": 1790000000, "owned_by": "library" }
+  ]
+}

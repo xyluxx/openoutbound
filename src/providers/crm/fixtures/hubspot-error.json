@@ -1,0 +1,12 @@
+{
+  "status": "error",
+  "message": "Property values were not valid: dealstage is not a valid stage",
+  "errors": [
+    {
+      "message": "dealstage is not valid",
+      "code": "INVALID_OPTION"
+    }
+  ],
+  "category": "VALIDATION_ERROR",
+  "correlationId": "a43683b0-5717-4ceb-80b4-104d02915d8c"
+}

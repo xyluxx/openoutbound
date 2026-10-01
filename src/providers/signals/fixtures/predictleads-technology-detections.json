@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "id": "91f24898-0003-4000-8000-000000000001",
+      "type": "technology_detection",
+      "attributes": {
+        "first_seen_at": "2026-09-14T10:00:00Z",
+        "last_seen_at": "2026-09-18T10:00:00Z",
+        "behind_firewall": false,
+        "score": 0.9,
+        "source_count": 4
+      },
+      "relationships": {
+        "technology": {
+          "data": { "id": "t0000000-0000-4000-8000-000000000001", "type": "technology" }
+        }
+      }
+    },
+    {
+      "id": "91f24898-0003-4000-8000-000000000002",
+      "type": "technology_detection",
+      "attributes": { "first_seen_at": "2026-09-15T10:00:00Z", "score": 1.0 },
+      "relationships": {
+        "technology": {
+          "data": { "id": "t0000000-0000-4000-8000-000000000404", "type": "technology" }
+        }
+      }
+    }
+  ],
+  "included": [
+    {
+      "id": "t0000000-0000-4000-8000-000000000001",
+      "type": "technology",
+      "attributes": { "name": "Examplytics CRM" }
+    }
+  ]
+}

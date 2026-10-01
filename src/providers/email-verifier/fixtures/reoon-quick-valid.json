@@ -1,0 +1,10 @@
+{
+  "email": "dana@brightsmile.example.com",
+  "status": "valid",
+  "is_valid_syntax": true,
+  "is_disposable": false,
+  "is_role_account": false,
+  "mx_accepts_mail": true,
+  "is_free_email": false,
+  "verification_mode": "quick"
+}

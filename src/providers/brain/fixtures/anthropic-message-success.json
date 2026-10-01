@@ -1,0 +1,27 @@
+{
+  "id": "msg_01HarborDentalExample",
+  "type": "message",
+  "role": "assistant",
+  "model": "claude-sonnet-5",
+  "content": [
+    { "type": "thinking", "thinking": "", "signature": "c2lnbmF0dXJlLWV4YW1wbGU=" },
+    {
+      "type": "text",
+      "text": "{\"subject\":\"Quick idea for Harbor Dental\",\"body\":\"Hi Dana, saw the new Lakeside clinic opening.\",\"angle\":\"signal\"}"
+    }
+  ],
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "stop_details": null,
+  "usage": {
+    "input_tokens": 1200,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 3000,
+    "output_tokens": 400,
+    "cache_creation": null,
+    "inference_geo": "us",
+    "output_tokens_details": { "thinking_tokens": 250 },
+    "server_tool_use": null,
+    "service_tier": "standard"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "created_at": "2026-09-21T10:00:00.000000Z",
+  "created_by": "https://api.calendly.com/users/USERAAAAAAAAAAAA",
+  "event": "invitee.canceled",
+  "payload": {
+    "cancel_url": "https://calendly.com/cancellations/INVITEEB00000002",
+    "cancellation": {
+      "canceled_by": "Front Desk",
+      "reason": "Something came up",
+      "canceler_type": "invitee",
+      "created_at": "2026-09-21T09:59:58.000000Z"
+    },
+    "created_at": "2026-09-20T08:59:58.000000Z",
+    "email": "office@harbor-dental.example.com",
+    "event": "https://api.calendly.com/scheduled_events/EVENTB0000000002",
+    "name": "Front Desk",
+    "new_invitee": null,
+    "no_show": null,
+    "old_invitee": "https://api.calendly.com/scheduled_events/EVENTA0000000001/invitees/INVITEEA00000001",
+    "rescheduled": false,
+    "status": "canceled",
+    "timezone": "Europe/Berlin",
+    "tracking": {
+      "utm_campaign": null,
+      "utm_source": "openoutbound",
+      "utm_medium": null,
+      "utm_content": "bkdana000001",
+      "utm_term": null,
+      "salesforce_uuid": null
+    },
+    "updated_at": "2026-09-21T09:59:58.000000Z",
+    "uri": "https://api.calendly.com/scheduled_events/EVENTB0000000002/invitees/INVITEEB00000002",
+    "scheduled_event": {
+      "uri": "https://api.calendly.com/scheduled_events/EVENTB0000000002",
+      "name": "Intro call",
+      "status": "canceled",
+      "start_time": "2026-10-08T09:00:00.000000Z",
+      "end_time": "2026-10-08T09:30:00.000000Z"
+    }
+  }
+}

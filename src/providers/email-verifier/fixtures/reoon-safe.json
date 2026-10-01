@@ -1,0 +1,18 @@
+{
+  "email": "dana@brightsmile.example.com",
+  "status": "safe",
+  "overall_score": 98,
+  "is_safe_to_send": true,
+  "is_valid_syntax": true,
+  "is_disposable": false,
+  "is_role_account": false,
+  "can_connect_smtp": true,
+  "has_inbox_full": false,
+  "is_catch_all": false,
+  "is_deliverable": true,
+  "is_disabled": false,
+  "is_spamtrap": false,
+  "is_free_email": false,
+  "mx_accepts_mail": true,
+  "verification_mode": "power"
+}

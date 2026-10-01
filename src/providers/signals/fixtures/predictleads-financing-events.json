@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "id": "b6eb4fdc-0002-4000-8000-000000000001",
+      "type": "financing_event",
+      "attributes": {
+        "effective_date": "2026-09-01",
+        "categories": ["series_a", "venture"],
+        "financing_type_normalized": "series_a",
+        "amount_normalized": 12000000,
+        "source_urls": ["https://news.example.org/northwind-raises-series-a"]
+      }
+    },
+    {
+      "id": "b6eb4fdc-0002-4000-8000-000000000002",
+      "type": "financing_event",
+      "attributes": {
+        "effective_date": "2026-08-01",
+        "financing_type_normalized": "seed",
+        "amount_normalized": null,
+        "source_urls": []
+      }
+    }
+  ]
+}

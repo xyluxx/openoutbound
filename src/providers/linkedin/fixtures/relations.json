@@ -1,0 +1,26 @@
+{
+  "object": "UserRelationsList",
+  "items": [
+    {
+      "object": "UserRelation",
+      "connection_urn": "urn:li:fsd_connection:ACoAAExampleRowanVale0001",
+      "created_at": 1790002800000,
+      "first_name": "Rowan",
+      "last_name": "Vale",
+      "member_id": "ACoAAExampleRowanVale0001",
+      "member_urn": "urn:li:fsd_profile:ACoAAExampleRowanVale0001",
+      "headline": "Head of Operations",
+      "public_identifier": "rowan-vale-example",
+      "public_profile_url": "https://www.linkedin.com/in/rowan-vale-example"
+    },
+    {
+      "object": "UserRelation",
+      "created_at": 1785585600000,
+      "first_name": "Morgan",
+      "last_name": "Hale",
+      "member_id": "ACoAAExampleMorganHale009",
+      "public_identifier": "morgan-hale-example"
+    }
+  ],
+  "cursor": "cursor-relations-2"
+}

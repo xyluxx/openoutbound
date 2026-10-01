@@ -1,0 +1,62 @@
+{
+  "object": "AccountList",
+  "items": [
+    {
+      "object": "Account",
+      "type": "LINKEDIN",
+      "id": "uni_acc_Sam01Example",
+      "name": "Sam Sender",
+      "created_at": "2026-09-01T10:00:00.000Z",
+      "connection_params": {
+        "im": {
+          "id": "ACoAAExampleSamSender0001",
+          "publicIdentifier": "sam-sender-example",
+          "username": "Sam Sender",
+          "premiumId": null,
+          "premiumFeatures": []
+        }
+      },
+      "sources": [
+        {
+          "id": "uni_acc_Sam01Example_MESSAGING",
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "object": "Account",
+      "type": "LINKEDIN",
+      "id": "uni_acc_Pat02Example",
+      "name": "Pat Premium",
+      "created_at": "2026-09-02T10:00:00.000Z",
+      "connection_params": {
+        "im": {
+          "id": "ACoAAExamplePatPremium02",
+          "publicIdentifier": "pat-premium-example",
+          "username": "Pat Premium",
+          "premiumId": "premium-example-1",
+          "premiumFeatures": ["premium"]
+        }
+      },
+      "sources": [
+        {
+          "id": "uni_acc_Pat02Example_MESSAGING",
+          "status": "CREDENTIALS"
+        }
+      ]
+    },
+    {
+      "object": "Account",
+      "type": "WHATSAPP",
+      "id": "uni_acc_Wa03Example",
+      "name": "Support line",
+      "sources": [
+        {
+          "id": "uni_acc_Wa03Example_MESSAGING",
+          "status": "OK"
+        }
+      ]
+    }
+  ],
+  "cursor": null
+}

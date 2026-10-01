@@ -1,0 +1,5 @@
+{
+  "errors": [
+    { "id": "wrong_params", "code": 400, "details": "You are missing the domain parameter" }
+  ]
+}

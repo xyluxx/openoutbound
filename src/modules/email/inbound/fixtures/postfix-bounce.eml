@@ -1,0 +1,56 @@
+Return-Path: <>
+From: MAILER-DAEMON@mail.brand.example.com (Mail Delivery System)
+Subject: Undelivered Mail Returned to Sender
+To: sam@brand.example.com
+Auto-Submitted: auto-replied
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+	boundary="1F2E3D4C5B.1758466000/mail.brand.example.com"
+Message-Id: <20260921150700.1F2E3D4C5B@mail.brand.example.com>
+Date: Mon, 21 Sep 2026 15:07:00 +0000 (UTC)
+
+This is a MIME-encapsulated message.
+
+--1F2E3D4C5B.1758466000/mail.brand.example.com
+Content-Description: Notification
+Content-Type: text/plain; charset=us-ascii
+
+This is the mail system at host mail.brand.example.com.
+
+I'm sorry to have to inform you that your message could not
+be delivered to one or more recipients. It's attached below.
+
+<gone@summit.example.org>: host mx.summit.example.org[192.0.2.10] said: 550
+    5.1.1 <gone@summit.example.org>: Recipient address rejected: User unknown
+    in virtual mailbox table (in reply to RCPT TO command)
+
+--1F2E3D4C5B.1758466000/mail.brand.example.com
+Content-Description: Delivery report
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; mail.brand.example.com
+X-Postfix-Queue-ID: 1F2E3D4C5B
+X-Postfix-Sender: rfc822; sam@brand.example.com
+Arrival-Date: Mon, 21 Sep 2026 15:06:58 +0000 (UTC)
+
+Final-Recipient: rfc822; gone@summit.example.org
+Original-Recipient: rfc822;gone@summit.example.org
+Action: failed
+Status: 5.1.1
+Remote-MTA: dns; mx.summit.example.org
+Diagnostic-Code: smtp; 550 5.1.1 <gone@summit.example.org>: Recipient address
+    rejected: User unknown in virtual mailbox table
+
+--1F2E3D4C5B.1758466000/mail.brand.example.com
+Content-Description: Undelivered Message
+Content-Type: message/rfc822
+
+From: Sam Carter <sam@brand.example.com>
+To: gone@summit.example.org
+Subject: Quick question
+Message-ID: <orig-postfix@brand.example.com>
+Date: Mon, 21 Sep 2026 15:06:58 +0000
+
+Hi, short note.
+
+--1F2E3D4C5B.1758466000/mail.brand.example.com--

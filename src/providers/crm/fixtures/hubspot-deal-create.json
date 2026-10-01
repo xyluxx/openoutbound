@@ -1,0 +1,10 @@
+{
+  "id": "19621835902",
+  "properties": {
+    "dealname": "Harbor Dental (OpenOutbound)",
+    "amount": "12000",
+    "dealstage": "presentationscheduled",
+    "pipeline": "default"
+  },
+  "archived": false
+}

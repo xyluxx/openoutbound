@@ -1,0 +1,28 @@
+{
+  "created_at": "2026-10-06T15:40:00.000000Z",
+  "created_by": "https://api.calendly.com/users/USERAAAAAAAAAAAA",
+  "event": "invitee_no_show.created",
+  "payload": {
+    "email": "office@harbor-dental.example.com",
+    "name": "Front Desk",
+    "status": "active",
+    "no_show": {
+      "uri": "https://api.calendly.com/invitee_no_shows/NOSHOWA000000001",
+      "created_at": "2026-10-06T15:40:00.000000Z"
+    },
+    "tracking": {
+      "utm_campaign": null,
+      "utm_source": "openoutbound",
+      "utm_medium": null,
+      "utm_content": "bkdana000001",
+      "utm_term": null,
+      "salesforce_uuid": null
+    },
+    "uri": "https://api.calendly.com/scheduled_events/EVENTA0000000001/invitees/INVITEEA00000001",
+    "scheduled_event": {
+      "uri": "https://api.calendly.com/scheduled_events/EVENTA0000000001",
+      "start_time": "2026-10-06T15:00:00.000000Z",
+      "end_time": "2026-10-06T15:30:00.000000Z"
+    }
+  }
+}

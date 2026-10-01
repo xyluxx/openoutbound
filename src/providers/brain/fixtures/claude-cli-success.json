@@ -1,0 +1,46 @@
+{
+  "type": "result",
+  "subtype": "success",
+  "is_error": false,
+  "duration_ms": 8120,
+  "duration_api_ms": 7400,
+  "num_turns": 2,
+  "result": "",
+  "stop_reason": "end_turn",
+  "session_id": "00000000-0000-4000-8000-000000000001",
+  "total_cost_usd": 0.0213,
+  "usage": {
+    "input_tokens": 40,
+    "cache_creation_input_tokens": 1800,
+    "cache_read_input_tokens": 12000,
+    "output_tokens": 350
+  },
+  "modelUsage": {
+    "claude-haiku-4-5": {
+      "inputTokens": 200,
+      "outputTokens": 20,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 0,
+      "costUSD": 0.0003,
+      "contextWindow": 200000,
+      "maxOutputTokens": 64000
+    },
+    "claude-sonnet-5": {
+      "inputTokens": 40,
+      "outputTokens": 350,
+      "cacheReadInputTokens": 12000,
+      "cacheCreationInputTokens": 1800,
+      "webSearchRequests": 0,
+      "costUSD": 0.021,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000
+    }
+  },
+  "permission_denials": [],
+  "structured_output": {
+    "subject": "Quick idea for Harbor Dental",
+    "body": "Hi Dana, congrats on the Lakeside clinic.",
+    "angle": "signal"
+  }
+}

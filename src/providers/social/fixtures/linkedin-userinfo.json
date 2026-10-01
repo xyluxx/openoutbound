@@ -1,0 +1,11 @@
+{
+  "sub": "exampleSub01",
+  "name": "Sam Sender",
+  "given_name": "Sam",
+  "family_name": "Sender",
+  "picture": null,
+  "locale": {
+    "country": "US",
+    "language": "en"
+  }
+}

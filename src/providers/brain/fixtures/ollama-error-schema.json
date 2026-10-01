@@ -1,0 +1,8 @@
+{
+  "error": {
+    "message": "invalid JSON schema in response_format: unsupported keyword",
+    "type": "invalid_request_error",
+    "param": null,
+    "code": null
+  }
+}

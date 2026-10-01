@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Cedar Labs News</title>
+  <entry>
+    <title>Cedar Labs opens a second clinic in Round Rock</title>
+    <link rel="alternate" href="https://cedar.example.com/news/second-clinic"/>
+    <id>tag:cedar.example.com,2026:news-7</id>
+    <published>2026-09-10T08:00:00Z</published>
+    <summary>Opening in November with four chairs.</summary>
+    <author><name>Tomas Novak</name></author>
+  </entry>
+</feed>

@@ -1,0 +1,13 @@
+{
+  "email": "bademail@gmal.example.com",
+  "quality": "bad",
+  "result": "invalid",
+  "resultcode": 6,
+  "subresult": "unknown",
+  "free": false,
+  "role": false,
+  "didyoumean": "bademail@gmail.example.com",
+  "credits": 4998,
+  "error": "",
+  "livemode": true
+}

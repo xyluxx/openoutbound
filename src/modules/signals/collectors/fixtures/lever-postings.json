@@ -1,0 +1,22 @@
+[
+  {
+    "id": "ec557bc9-1cc2-4085-b920-3f123f31a2c2",
+    "text": "Salesforce Administrator",
+    "categories": {
+      "team": "Revenue",
+      "department": "Sales",
+      "location": "Remote - USA",
+      "commitment": "Full-time"
+    },
+    "country": "US",
+    "workplaceType": "remote",
+    "hostedUrl": "https://jobs.lever.co/bluefield-example/ec557bc9-1cc2-4085-b920-3f123f31a2c2",
+    "createdAt": 1789900000000
+  },
+  {
+    "id": "0b1c2d3e-0000-4000-8000-000000000002",
+    "text": "Customer Support Specialist",
+    "categories": { "team": "Support", "location": "Denver, CO" },
+    "hostedUrl": "https://jobs.lever.co/bluefield-example/0b1c2d3e-0000-4000-8000-000000000002"
+  }
+]

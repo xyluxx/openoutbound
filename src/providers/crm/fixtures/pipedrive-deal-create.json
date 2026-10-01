@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "data": {
+    "id": 101,
+    "title": "Harbor Dental (OpenOutbound)",
+    "value": 12000,
+    "currency": "EUR",
+    "person_id": 8,
+    "org_id": 13,
+    "stage_id": 3,
+    "status": "open"
+  }
+}

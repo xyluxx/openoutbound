@@ -1,0 +1,21 @@
+{
+  "jobs": [
+    {
+      "id": "7458d4e9-da2e-47bd-98cb-adfda43d42b2",
+      "title": "Head of Sales Development",
+      "department": "Sales",
+      "team": "Go To Market",
+      "location": "Remote - European Union",
+      "employmentType": "FullTime",
+      "isListed": true,
+      "publishedAt": "2026-09-15T14:29:08.532+00:00",
+      "jobUrl": "https://jobs.ashbyhq.com/cedarlabs/7458d4e9-da2e-47bd-98cb-adfda43d42b2"
+    },
+    {
+      "id": "hidden-1",
+      "title": "SDR (internal only)",
+      "isListed": false,
+      "jobUrl": "https://jobs.ashbyhq.com/cedarlabs/hidden-1"
+    }
+  ]
+}

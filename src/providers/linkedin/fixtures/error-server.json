@@ -1,0 +1,6 @@
+{
+  "status": 500,
+  "type": "errors/unexpected_error",
+  "title": "Unexpected error",
+  "detail": "Something went wrong on the provider side."
+}

@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.openoutbound/
+.env
+*.log
+coverage/
+evals/results/
+.DS_Store

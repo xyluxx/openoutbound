@@ -1,0 +1,17 @@
+{
+  "object": "UserProfile",
+  "provider": "LINKEDIN",
+  "provider_id": "ACoAAExampleRowanVale0001",
+  "public_identifier": "rowan-vale-example",
+  "first_name": "Rowan",
+  "last_name": "Vale",
+  "headline": "Head of Operations at Brightpath Example Co",
+  "location": "Austin, Texas, United States",
+  "network_distance": "SECOND_DEGREE",
+  "connections_count": 412,
+  "follower_count": 530,
+  "is_premium": false,
+  "is_open_profile": false,
+  "public_profile_url": "https://www.linkedin.com/in/rowan-vale-example",
+  "websites": ["https://brightpath.example.com"]
+}

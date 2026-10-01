@@ -1,0 +1,6 @@
+{
+  "status": 403,
+  "type": "errors/provider_error",
+  "title": "Provider error",
+  "detail": "Your LinkedIn account is temporarily restricted."
+}

@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "openoutbound": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/openoutbound/dist/cli/main.js",
+        "--home",
+        "/absolute/path/to/openoutbound",
+        "mcp",
+        "--workspace",
+        "northwind"
+      ]
+    }
+  }
+}

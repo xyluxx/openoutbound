@@ -1,0 +1,22 @@
+{
+  "name": "openoutbound",
+  "displayName": "OpenOutbound",
+  "version": "0.1.0",
+  "description": "Outbound skill plus an MCP connection to your OpenOutbound engine: find and research leads, watch signals, run email and LinkedIn campaigns, triage replies, get reports.",
+  "author": {
+    "name": "The OpenOutbound Authors"
+  },
+  "homepage": "https://github.com/xyluxx/openoutbound",
+  "repository": "https://github.com/xyluxx/openoutbound",
+  "license": "Apache-2.0",
+  "keywords": ["sales", "outbound", "ai-sdr", "cold-email", "linkedin", "mcp"],
+  "mcpServers": {
+    "openoutbound": {
+      "type": "http",
+      "url": "${OPENOUTBOUND_URL:-http://127.0.0.1:7331}/mcp",
+      "headers": {
+        "Authorization": "Bearer ${OPENOUTBOUND_API_KEY}"
+      }
+    }
+  }
+}

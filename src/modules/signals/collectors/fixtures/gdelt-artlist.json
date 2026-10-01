@@ -1,0 +1,40 @@
+{
+  "articles": [
+    {
+      "url": "https://business-news.example.org/2026/09/northwind-analytics-raises-series-b?utm_source=gdelt",
+      "url_mobile": "",
+      "title": "Northwind Analytics raises $30M Series B to expand forecasting platform",
+      "seendate": "20260917T081500Z",
+      "socialimage": "",
+      "domain": "business-news.example.org",
+      "language": "English",
+      "sourcecountry": "United States"
+    },
+    {
+      "url": "https://syndicate.example.net/northwind-series-b",
+      "title": "Northwind Analytics raises $30M Series B to expand forecasting platform",
+      "seendate": "20260917T090000Z",
+      "domain": "syndicate.example.net",
+      "language": "English",
+      "sourcecountry": "United States"
+    },
+    {
+      "url": "https://sports.example.org/northwind-rovers-win",
+      "title": "Northwind Rovers win the regional final",
+      "seendate": "20260915T190000Z",
+      "domain": "sports.example.org",
+      "language": "English",
+      "sourcecountry": "United Kingdom"
+    },
+    {
+      "url": "https://old-news.example.org/northwind-2025",
+      "title": "Northwind Analytics opens Denver office",
+      "seendate": "20250101T000000Z",
+      "domain": "old-news.example.org",
+      "language": "English",
+      "sourcecountry": "United States"
+    },
+    { "title": "No URL article", "seendate": "20260916T000000Z" },
+    "not an object"
+  ]
+}

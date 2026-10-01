@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "data": {
+    "id": 501,
+    "content": "<p><strong>Meeting: booked for 2026-10-08 13:00 UTC</strong></p>",
+    "person_id": 8,
+    "deal_id": 101,
+    "org_id": 13,
+    "add_time": "2026-09-19 12:00:00"
+  }
+}

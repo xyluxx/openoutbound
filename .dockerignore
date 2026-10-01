@@ -1,0 +1,14 @@
+.git
+.github
+node_modules
+dist
+coverage
+.openoutbound
+.env
+.env.*
+!.env.example
+*.log
+evals/results
+docs
+assets
+examples

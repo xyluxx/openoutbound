@@ -1,0 +1,20 @@
+# Add ONE of these blocks to ~/.codex/config.toml
+
+# Option A: local engine started by Codex (stdio). --home names the engine folder, so it works
+# whatever folder Codex runs in. --workspace northwind keeps the agent in the sandbox; use your
+# real workspace slug when you go live.
+[mcp_servers.openoutbound]
+command = "node"
+args = [
+  "/absolute/path/to/openoutbound/dist/cli/main.js",
+  "--home",
+  "/absolute/path/to/openoutbound",
+  "mcp",
+  "--workspace",
+  "northwind",
+]
+
+# Option B: a running engine (openoutbound serve or Docker) over HTTP
+# [mcp_servers.openoutbound]
+# url = "http://127.0.0.1:7331/mcp"
+# bearer_token_env_var = "OPENOUTBOUND_API_KEY"

@@ -1,0 +1,33 @@
+name: Provider request
+description: Ask for a new plug-in (AI brain, data source, email finder, signals, LinkedIn, CRM).
+labels: [provider]
+body:
+  - type: dropdown
+    id: slot
+    attributes:
+      label: Slot
+      options:
+        - AI brain
+        - Lead source
+        - Email finder
+        - Email verifier
+        - Research
+        - Signals
+        - LinkedIn
+        - Social publishing
+        - CRM
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: service
+    attributes:
+      label: Service
+      description: Name and link to its API documentation.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why this service
+      description: What it does better than the built-in options, pricing model, and whether you could help test it.

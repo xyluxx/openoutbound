@@ -1,0 +1,8 @@
+{
+  "error": "Invalid access credentials.",
+  "error_details": {
+    "code": "AUTH.AUTHENTICATION.CREDENTIALS_MISSING",
+    "message": "This request carried no credential Apollo could authenticate.",
+    "suggestions": [{ "label": "Send your API key in the X-Api-Key header", "header": "X-Api-Key" }]
+  }
+}

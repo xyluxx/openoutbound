@@ -1,0 +1,8 @@
+{
+  "id": "gen-02UpstreamErrorExample",
+  "object": "chat.completion",
+  "created": 1790000000,
+  "model": "examplevendor/example-large",
+  "choices": [],
+  "error": { "code": 502, "message": "Upstream provider returned an error" }
+}

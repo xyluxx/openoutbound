@@ -1,0 +1,26 @@
+{
+  "search_id": "search_fcb2b4f3c75e418687bccaa1a8381331",
+  "results": [
+    {
+      "url": "https://news.example.com/lumen-home-raises-series-b",
+      "title": "Lumen Home raises Series B to expand into Europe",
+      "publish_date": "2026-09-02",
+      "excerpts": [
+        "Lumen Home announced a $20M Series B.",
+        "The company plans to open a warehouse in Rotterdam."
+      ]
+    },
+    {
+      "url": "https://lumenhome.example.com/careers/demand-planner",
+      "title": "Demand Planner - Lumen Home",
+      "publish_date": null,
+      "excerpts": ["We are hiring a Demand Planner to own our forecast."]
+    },
+    {
+      "url": "ftp://files.example.com/report.pdf",
+      "title": "Not a web page",
+      "excerpts": []
+    }
+  ],
+  "session_id": "session_fcb2b4f3c75e418687bccaa1a8381331"
+}

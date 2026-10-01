@@ -1,0 +1,10 @@
+{
+  "data": {
+    "first_name": "Nobody",
+    "last_name": "Known",
+    "email": null,
+    "score": null,
+    "domain": "unknown.example.com",
+    "verification": { "status": null }
+  }
+}

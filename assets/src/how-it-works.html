@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>How OpenOutbound works</title>
+<!--
+  THESIS: one engine in the middle; anything can drive it, every call passes one gate, and every outside service is a plug-in.
+  OWN-WORLD: the canon of premium developer tools, chosen by the owner: Linear and Vercel in dark, Apple and Notion in light.
+  STORY: drivers on the left enter through the safety gate; the engine does the work; optional plug-ins branch off on the right.
+  FIRST VIEWPORT: the engine panel is the brightest object; solid wires for the doors, dotted wires for optional plug-ins.
+  FORM: seed 6fa5e12c, canon chosen by the owner. Same tokens as the banner. Text no smaller than 14px on the 1280 canvas so it survives a README at 70 percent.
+  FINISH: every name true to the code, contrast at AA, no gradient text, no eyebrow labels, no decorative glass, shadows with offset and blur.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=block" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<script>
+  const params = new URLSearchParams(location.search);
+  document.documentElement.dataset.theme = params.get("theme") === "light" ? "light" : "dark";
+  if (params.get("bg") === "github") document.documentElement.dataset.page = "github";
+</script>
+<style>
+  .canvas {
+    position: relative;
+    width: 1280px;
+    height: 624px;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--bg);
+  }
+
+  .room {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: radial-gradient(30% 40% at 50% 32%, var(--room-light), transparent 72%);
+  }
+
+  .wires {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .diagram {
+    position: absolute;
+    top: 56px;
+    left: 48px;
+    right: 48px;
+    display: grid;
+    grid-template-columns: 244px 1fr 460px 1fr 268px;
+    grid-template-rows: auto 1fr;
+  }
+
+  .heading {
+    margin-bottom: 18px;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+  }
+
+  .drivers-heading {
+    grid-column: 1;
+  }
+
+  .plugins-heading {
+    grid-column: 5;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    grid-row: 2;
+  }
+
+  .drivers {
+    grid-column: 1;
+  }
+
+  .plugins {
+    grid-column: 5;
+  }
+
+  .item {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    border-top: 1px solid var(--line);
+  }
+
+  .item:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .item h3 {
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.012em;
+  }
+
+  .item p {
+    margin-top: 3px;
+    font-size: 15px;
+    color: var(--fg-2);
+  }
+
+  .plugins .item {
+    padding: 11px 0 12px;
+  }
+
+
+  .doors {
+    display: flex;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .pill {
+    padding: 3px 10px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    font-size: 14px;
+    color: var(--fg);
+    background: var(--bg);
+  }
+
+  .engine {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-panel);
+    background: linear-gradient(180deg, var(--panel-top), var(--panel) 140px);
+    box-shadow: var(--shadow-panel);
+  }
+
+  .engine::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 14%;
+    right: 14%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--edge-light), transparent);
+  }
+
+  .engine-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .engine-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .always {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--fg-2);
+  }
+
+  .always::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  .gate {
+    padding: 16px 20px 18px;
+    border-bottom: 1px solid var(--line);
+    background: var(--sunk);
+  }
+
+  .gate-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .gate-title svg {
+    color: var(--fg-2);
+  }
+
+  .checks {
+    display: flex;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  /* Checks are not doors: filled chips, no outline. */
+  .checks .pill {
+    border-color: transparent;
+    background: var(--chip);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+  }
+
+  .modules {
+    display: grid;
+    flex: 1;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+  }
+
+  .module {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .module:nth-child(odd) {
+    border-right: 1px solid var(--line);
+  }
+
+  .module h4 {
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.012em;
+  }
+
+  .module p {
+    margin-top: 3px;
+    font-size: 15px;
+    color: var(--fg-2);
+  }
+
+  .engine-foot {
+    padding: 14px 20px 15px;
+    font-size: 14px;
+    color: var(--fg-2);
+  }
+</style>
+</head>
+<body>
+<main class="canvas">
+  <div class="room" aria-hidden="true"></div>
+  <svg class="wires" width="1280" height="624" aria-hidden="true"></svg>
+
+  <div class="diagram">
+    <h2 class="heading drivers-heading">Who drives it</h2>
+    <section class="list drivers">
+      <div class="item" data-wire="driver">
+        <h3>AI agents</h3>
+        <p>Claude Code, Codex, Cursor</p>
+        <div class="doors"><span class="pill">MCP server</span><span class="pill">Agent Skill</span></div>
+      </div>
+      <div class="item" data-wire="driver">
+        <h3>Apps and scripts</h3>
+        <p>Your code, cron jobs, workflows</p>
+        <div class="doors"><span class="pill">REST API</span></div>
+      </div>
+      <div class="item" data-wire="driver">
+        <h3>People</h3>
+        <p>Your team, in a terminal</p>
+        <div class="doors"><span class="pill">CLI</span></div>
+      </div>
+    </section>
+
+    <section class="engine">
+      <div class="engine-head">
+        <div class="engine-name">
+          <svg class="mark" viewBox="0 0 64 64" width="20" height="20" aria-hidden="true"><circle cx="27.5" cy="36.5" r="17" fill="none" stroke="currentColor" stroke-width="8"/><circle cx="50.5" cy="13.5" r="7" fill="currentColor"/></svg>
+          OpenOutbound engine
+        </div>
+        <div class="always">Runs 24/7</div>
+      </div>
+      <div class="gate" data-wire="gate">
+        <h3 class="gate-title">
+          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 1.5 2.75 3.5v4.1c0 3.1 2.2 5.6 5.25 6.9 3.05-1.3 5.25-3.8 5.25-6.9V3.5z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          Every call passes one safety gate
+        </h3>
+        <div class="checks"><span class="pill">Scopes</span><span class="pill">Limits</span><span class="pill">Approvals</span><span class="pill">Budgets</span><span class="pill">Audit log</span></div>
+      </div>
+      <div class="modules" data-wire="work">
+        <div class="module"><h4>Leads</h4><p>Import, search, fit scores</p></div>
+        <div class="module"><h4>Research and signals</h4><p>Sourced briefs, 15 signals</p></div>
+        <div class="module"><h4>Campaigns</h4><p>Steps, review levels, A/B</p></div>
+        <div class="module"><h4>Sending</h4><p>Caps, ramp-up, time zones</p></div>
+        <div class="module"><h4>Inbox</h4><p>Reply sync and triage</p></div>
+        <div class="module"><h4>Reports</h4><p>Funnels and sender health</p></div>
+      </div>
+      <div class="engine-foot">Your database: Postgres, or PGlite built in</div>
+    </section>
+
+    <h2 class="heading plugins-heading">Plug-ins, all optional</h2>
+    <section class="list plugins">
+      <div class="item" data-wire="plugin"><h3>AI brain</h3><p>Anthropic, OpenAI, Gemini, local, CLI</p></div>
+      <div class="item" data-wire="plugin"><h3>Mailboxes</h3><p>SMTP and IMAP, Google, Microsoft</p></div>
+      <div class="item" data-wire="plugin"><h3>Lead sources</h3><p>Apollo, Google Maps, your CSV</p></div>
+      <div class="item" data-wire="plugin"><h3>Finders and verifiers</h3><p>Hunter, Prospeo, MillionVerifier</p></div>
+      <div class="item" data-wire="plugin"><h3>Research and signals</h3><p>Exa, Tavily, PredictLeads, Crustdata</p></div>
+      <div class="item" data-wire="plugin"><h3>LinkedIn</h3><p>Unipile, official posting API</p></div>
+      <div class="item" data-wire="plugin"><h3>CRM</h3><p>HubSpot, Pipedrive, webhooks</p></div>
+    </section>
+  </div>
+</main>
+<script>
+  // Wires are drawn from the laid-out boxes, so copy changes never leave a line pointing at nothing.
+  function draw() {
+    const svg = document.querySelector(".wires");
+    const origin = document.querySelector(".canvas").getBoundingClientRect();
+    const box = (el) => {
+      const r = el.getBoundingClientRect();
+      return { left: r.left - origin.left, right: r.right - origin.left, mid: (r.top + r.bottom) / 2 - origin.top };
+    };
+    const style = getComputedStyle(document.documentElement);
+    const wire = style.getPropertyValue("--wire").trim();
+    const bg = style.getPropertyValue("--bg").trim();
+    const add = (name, attributes) => {
+      const node = document.createElementNS("http://www.w3.org/2000/svg", name);
+      for (const [key, value] of Object.entries(attributes)) node.setAttribute(key, String(value));
+      svg.append(node);
+    };
+    const line = (d, dotted) =>
+      add("path", {
+        d,
+        fill: "none",
+        stroke: wire,
+        "stroke-width": dotted ? 2 : 1.5,
+        "stroke-linecap": "round",
+        ...(dotted ? { "stroke-dasharray": "0.1 4.5" } : {}),
+      });
+    const R = 10;
+
+    // Drivers: each one runs right to a shared bus, then into the engine at the gate.
+    const engine = box(document.querySelector(".engine"));
+    const entry = { x: engine.left, y: box(document.querySelector("[data-wire=gate]")).mid };
+    const drivers = [...document.querySelectorAll("[data-wire=driver]")].map((el) => ({ x: box(el).right + 16, y: box(el).mid }));
+    const inBus = (drivers[0].x + entry.x) / 2;
+    for (const d of drivers) {
+      const dy = entry.y - d.y;
+      if (Math.abs(dy) < 1) {
+        line(`M${d.x} ${d.y} H${entry.x}`);
+      } else {
+        const s = Math.sign(dy);
+        const r = Math.min(R, Math.abs(dy) / 2);
+        line(`M${d.x} ${d.y} H${inBus - r} Q${inBus} ${d.y} ${inBus} ${d.y + s * r} V${entry.y - s * r} Q${inBus} ${entry.y} ${inBus + r} ${entry.y} H${entry.x}`);
+      }
+      add("circle", { cx: d.x, cy: d.y, r: 3, fill: wire });
+    }
+
+    // Plug-ins: one dotted trunk out of the middle of the engine, a bus, and a branch to each plug-in.
+    const exit = { x: engine.right, y: engine.mid };
+    const plugins = [...document.querySelectorAll("[data-wire=plugin]")].map((el) => ({ x: box(el).left - 16, y: box(el).mid }));
+    const outBus = (exit.x + plugins[0].x) / 2;
+    const first = plugins[0];
+    const last = plugins[plugins.length - 1];
+    line(`M${exit.x} ${exit.y} H${outBus}`, true);
+    line(`M${outBus} ${first.y + R} V${last.y - R}`, true);
+    line(`M${outBus} ${first.y + R} Q${outBus} ${first.y} ${outBus + R} ${first.y} H${first.x}`, true);
+    line(`M${outBus} ${last.y - R} Q${outBus} ${last.y} ${outBus + R} ${last.y} H${last.x}`, true);
+    for (const p of plugins.slice(1, -1)) line(`M${outBus} ${p.y} H${p.x}`, true);
+    for (const p of plugins) add("circle", { cx: p.x, cy: p.y, r: 3, fill: wire });
+
+    for (const point of [entry, exit]) {
+      add("circle", { cx: point.x, cy: point.y, r: 4.5, fill: bg, stroke: wire, "stroke-width": 1.5 });
+    }
+  }
+  document.fonts.ready.then(draw);
+</script>
+</body>
+</html>

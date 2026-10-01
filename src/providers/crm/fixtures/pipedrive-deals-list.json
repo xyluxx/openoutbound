@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": 97,
+      "title": "Harbor Dental renewal",
+      "person_id": 8,
+      "org_id": 13,
+      "status": "won"
+    },
+    {
+      "id": 101,
+      "title": "Harbor Dental (OpenOutbound)",
+      "person_id": 8,
+      "org_id": 13,
+      "status": "open"
+    }
+  ],
+  "additional_data": {
+    "next_cursor": null
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "triggerEvent": "BOOKING_NO_SHOW_UPDATED",
+  "createdAt": "2026-10-06T15:40:00.000Z",
+  "payload": {
+    "message": "dana.private@example.net marked as no-show",
+    "attendees": [{ "email": "dana.private@example.net", "noShow": true }],
+    "bookingUid": "calcom-uid-0001",
+    "bookingId": 100
+  }
+}

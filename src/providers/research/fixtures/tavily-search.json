@@ -1,0 +1,23 @@
+{
+  "query": "Lumen Home news",
+  "answer": null,
+  "results": [
+    {
+      "title": "Lumen Home names new VP Operations",
+      "url": "https://news.example.com/lumen-home-vp-operations",
+      "content": "Lumen Home has appointed Dana Reyes as VP Operations.",
+      "score": 0.81025416,
+      "published_date": "Tue, 08 Sep 2026 17:00:00 GMT"
+    },
+    {
+      "title": "Old article",
+      "url": "https://news.example.com/lumen-home-2019",
+      "content": "Lumen Home was founded.",
+      "score": 0.2,
+      "published_date": "Mon, 07 Jan 2019 10:00:00 GMT"
+    }
+  ],
+  "response_time": 1.67,
+  "usage": { "credits": 1 },
+  "request_id": "123e4567-e89b-12d3-a456-426614174111"
+}

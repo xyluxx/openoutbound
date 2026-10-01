@@ -1,0 +1,32 @@
+{
+  "total_entries": 3,
+  "people": [
+    {
+      "id": "64a1f0c2e5b7a10001a1b2c3",
+      "first_name": "Dana",
+      "last_name_obfuscated": "Ri***s",
+      "title": "Practice Owner",
+      "last_refreshed_at": "2026-08-01T10:00:00.000+00:00",
+      "has_email": true,
+      "has_city": true,
+      "has_state": true,
+      "has_country": true,
+      "has_direct_phone": "Yes",
+      "organization": {
+        "name": "Brightsmile Dental Studio",
+        "has_industry": true,
+        "has_phone": true,
+        "has_employee_count": true
+      }
+    },
+    {
+      "id": "64a1f0c2e5b7a10001a1b2c4",
+      "first_name": "Marco",
+      "last_name_obfuscated": "Pe***i",
+      "title": "Managing Partner",
+      "has_email": false,
+      "organization": { "name": "Northgate Family Dentistry" }
+    },
+    { "first_name": "Missing Id", "title": "Owner" }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "status": "success",
+  "error_code": null,
+  "error_message": null,
+  "total_requested_enrichments": 3,
+  "unique_enriched_records": 2,
+  "missing_records": 1,
+  "credits_consumed": 2,
+  "matches": [
+    {
+      "id": "64a1f0c2e5b7a10001a1b2c3",
+      "first_name": "Dana",
+      "last_name": "Rivers",
+      "name": "Dana Rivers",
+      "email": "dana.rivers@brightsmile.example.com",
+      "email_status": "verified",
+      "title": "Practice Owner",
+      "seniority": "owner",
+      "departments": ["master_operations"],
+      "linkedin_url": "http://www.linkedin.com/in/dana-rivers-example",
+      "city": "Austin",
+      "state": "Texas",
+      "country": "United States",
+      "match_confidence": "high",
+      "organization": {
+        "id": "615d029256de500001bdb460",
+        "name": "Brightsmile Dental Studio",
+        "website_url": "http://www.brightsmile.example.com",
+        "primary_domain": "brightsmile.example.com"
+      }
+    },
+    {
+      "id": "64a1f0c2e5b7a10001a1b2c4",
+      "first_name": "Marco",
+      "last_name": "Pellegrini",
+      "name": "Marco Pellegrini",
+      "email": "email_not_unlocked@domain.com",
+      "email_status": null,
+      "title": "Managing Partner",
+      "match_confidence": "medium",
+      "organization": {
+        "name": "Northgate Family Dentistry",
+        "primary_domain": "northgate.example.org"
+      }
+    },
+    null
+  ],
+  "request_id": 1039995589705121900
+}

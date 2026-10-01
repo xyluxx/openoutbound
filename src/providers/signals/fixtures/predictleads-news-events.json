@@ -1,0 +1,56 @@
+{
+  "data": [
+    {
+      "id": "f096ea55-0004-4000-8000-000000000001",
+      "type": "news_event",
+      "attributes": {
+        "summary": "Northwind Example expands offices in Lisbon, Portugal.",
+        "category": "expands_offices_in",
+        "found_at": "2026-09-15T09:00:00Z",
+        "confidence": 0.82
+      },
+      "relationships": {
+        "company1": { "data": { "id": "c0000000-0000-4000-8000-000000000001", "type": "company" } },
+        "most_relevant_source": {
+          "data": { "id": "n0000000-0000-4000-8000-000000000001", "type": "news_article" }
+        }
+      }
+    },
+    {
+      "id": "f096ea55-0004-4000-8000-000000000002",
+      "type": "news_event",
+      "attributes": {
+        "summary": "Northwind Example signs a new logistics client.",
+        "category": "signs_new_client",
+        "found_at": "2026-09-16T09:00:00Z",
+        "confidence": 0.1
+      },
+      "relationships": {
+        "most_relevant_source": {
+          "data": { "id": "n0000000-0000-4000-8000-000000000002", "type": "news_article" }
+        }
+      }
+    },
+    {
+      "id": "f096ea55-0004-4000-8000-000000000003",
+      "type": "news_event",
+      "attributes": { "summary": "An event without a source article.", "category": "hires" },
+      "relationships": {}
+    }
+  ],
+  "included": [
+    {
+      "id": "n0000000-0000-4000-8000-000000000001",
+      "type": "news_article",
+      "attributes": {
+        "url": "https://news.example.org/northwind-lisbon-office",
+        "title": "Northwind opens Lisbon office"
+      }
+    },
+    {
+      "id": "n0000000-0000-4000-8000-000000000002",
+      "type": "news_article",
+      "attributes": { "url": "https://news.example.org/northwind-new-client" }
+    }
+  ]
+}

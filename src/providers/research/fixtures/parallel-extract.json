@@ -1,0 +1,14 @@
+{
+  "extract_id": "extract_470002358ec147e8a40cb70d0d82627e",
+  "results": [
+    {
+      "url": "https://lumenhome.example.com/about",
+      "title": "About Lumen Home",
+      "publish_date": "2025-01-10",
+      "excerpts": ["Lumen Home makes lighting for small apartments."],
+      "full_content": "# About Lumen Home\n\nLumen Home makes lighting for small apartments. Founded in 2019."
+    }
+  ],
+  "errors": [],
+  "usage": [{ "name": "sku_extract_excerpts", "count": 1 }]
+}

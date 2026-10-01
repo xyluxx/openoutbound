@@ -1,0 +1,34 @@
+{
+  "object": "MessageList",
+  "items": [
+    {
+      "object": "Message",
+      "provider_id": "2-MessageExample01",
+      "id": "msgInboundExample01",
+      "chat_id": "chatExampleRowan0001",
+      "sender_id": "ACoAAExampleRowanVale0001",
+      "sender_attendee_id": "attendeeRowan01",
+      "text": "Thanks for reaching out. Happy to talk next week.",
+      "timestamp": "2026-09-21T16:30:00.000Z",
+      "is_sender": 0,
+      "seen": 0,
+      "attachments": []
+    },
+    {
+      "object": "Message",
+      "id": "msgOutboundExample02",
+      "chat_id": "chatExampleRowan0001",
+      "sender_id": "ACoAAExampleSamSender0001",
+      "text": "Great, does Tuesday work?",
+      "timestamp": "2026-09-21T17:00:00.000Z",
+      "is_sender": 1,
+      "attachments": []
+    },
+    {
+      "object": "Message",
+      "id": "msgBrokenExample03",
+      "text": "Entry without a chat id is ignored"
+    }
+  ],
+  "cursor": null
+}

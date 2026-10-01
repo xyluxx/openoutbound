@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>OpenOutbound wordmark</title>
+<!--
+  The lockup on a transparent background: the mark, then the name in Geist semibold.
+  Rendered for dark backgrounds (light ink) and light backgrounds (dark ink).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@600&display=block" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<script>
+  document.documentElement.dataset.theme = new URLSearchParams(location.search).get("theme") === "light" ? "light" : "dark";
+</script>
+<style>
+  html,
+  body {
+    background: transparent;
+  }
+
+  .lockup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    width: 480px;
+    height: 120px;
+    font-size: 50px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+</style>
+</head>
+<body>
+<div class="lockup">
+  <svg class="mark" viewBox="0 0 64 64" width="54" height="54" aria-hidden="true"><circle cx="27.5" cy="36.5" r="17" fill="none" stroke="currentColor" stroke-width="8"/><circle cx="50.5" cy="13.5" r="7" fill="currentColor"/></svg>
+  OpenOutbound
+</div>
+</body>
+</html>

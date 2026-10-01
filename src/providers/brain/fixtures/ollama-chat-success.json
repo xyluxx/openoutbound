@@ -1,0 +1,18 @@
+{
+  "id": "chatcmpl-417",
+  "object": "chat.completion",
+  "created": 1790000000,
+  "model": "example-local:8b",
+  "system_fingerprint": "fp_ollama",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "<think>\nThe user wants {a draft}. Keep it short.\n</think>\n{\"subject\":\"Quick idea\",\"body\":\"Hi Dana, short note.\",\"angle\":\"pain\"}"
+      }
+    }
+  ],
+  "usage": { "prompt_tokens": 350, "completion_tokens": 90, "total_tokens": 440 }
+}

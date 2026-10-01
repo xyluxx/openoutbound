@@ -1,0 +1,5 @@
+{
+  "status": 429,
+  "code": "TOO_MANY_REQUESTS",
+  "message": "Resource level throttle limit for calls to this resource is reached."
+}

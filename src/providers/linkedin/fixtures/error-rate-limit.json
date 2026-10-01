@@ -1,0 +1,7 @@
+{
+  "status": 429,
+  "type": "errors/too_many_requests",
+  "title": "Too many requests",
+  "detail": "The provider is limiting requests for this account.",
+  "instance": "/api/v1/users/invite"
+}

@@ -1,0 +1,19 @@
+{
+  "status": "COMPLETE",
+  "results": [
+    {
+      "id": "33451",
+      "properties": {
+        "email": "dana@harbor-dental.example.com",
+        "firstname": "Dana",
+        "lastname": "Reyes",
+        "hs_object_id": "33451"
+      },
+      "createdAt": "2026-09-27T14:31:48.469Z",
+      "updatedAt": "2026-09-27T14:31:48.469Z",
+      "archived": false
+    }
+  ],
+  "startedAt": "2026-09-27T14:31:48.400Z",
+  "completedAt": "2026-09-27T14:31:48.500Z"
+}

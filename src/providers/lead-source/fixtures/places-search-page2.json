@@ -1,0 +1,20 @@
+{
+  "places": [
+    {
+      "id": "ChIJexample0000000000000004",
+      "types": ["dentist"],
+      "primaryType": "dental_clinic",
+      "displayName": { "text": "Hillside Dental Care", "languageCode": "en" },
+      "formattedAddress": "5 Test Blvd, Round Rock, TX 78664, USA",
+      "location": { "latitude": 30.5083, "longitude": -97.6789 },
+      "businessStatus": "OPERATIONAL",
+      "internationalPhoneNumber": "+1 512-555-0144",
+      "websiteUri": "http://hillside-dental.example.org"
+    },
+    {
+      "id": "ChIJexample0000000000000001",
+      "displayName": { "text": "Brightsmile Dental Studio", "languageCode": "en" },
+      "businessStatus": "OPERATIONAL"
+    }
+  ]
+}

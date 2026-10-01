@@ -1,0 +1,7 @@
+{
+  "access_token": "example-linkedin-access-token",
+  "expires_in": 5184000,
+  "scope": "openid,profile,w_member_social",
+  "token_type": "Bearer",
+  "id_token": "example.id.token"
+}

@@ -1,0 +1,8 @@
+{
+  "error": {
+    "message": "Invalid schema for response_format 'email_draft': In context=(), 'required' is required to be supplied and to be an array including every key in properties.",
+    "type": "invalid_request_error",
+    "param": "text.format.schema",
+    "code": "invalid_json_schema"
+  }
+}

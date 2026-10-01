@@ -1,0 +1,9 @@
+{
+  "data": {
+    "plan_name": "Starter",
+    "requests": {
+      "searches": { "used": 120, "available": 500 },
+      "verifications": { "used": 10, "available": 1000 }
+    }
+  }
+}

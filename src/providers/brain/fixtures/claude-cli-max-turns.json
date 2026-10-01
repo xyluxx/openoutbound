@@ -1,0 +1,10 @@
+{
+  "type": "result",
+  "subtype": "error_max_turns",
+  "is_error": true,
+  "num_turns": 3,
+  "total_cost_usd": 0.01,
+  "usage": { "input_tokens": 3000, "output_tokens": 200 },
+  "modelUsage": {},
+  "errors": ["Reached maximum number of turns (3)"]
+}

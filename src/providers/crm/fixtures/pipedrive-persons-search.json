@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "data": {
+    "items": [
+      {
+        "result_score": 1.5,
+        "item": {
+          "id": 7,
+          "type": "person",
+          "name": "Dana Reyes",
+          "emails": ["dana@harbor-dental.example.com"],
+          "organization": {
+            "id": 12,
+            "name": "Harbor Dental"
+          }
+        }
+      }
+    ]
+  },
+  "additional_data": {
+    "next_cursor": null
+  }
+}

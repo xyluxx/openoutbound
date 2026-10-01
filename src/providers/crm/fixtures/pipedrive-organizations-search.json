@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "data": {
+    "items": [
+      {
+        "result_score": 1.2,
+        "item": {
+          "id": 12,
+          "type": "organization",
+          "name": "Harbor Dental",
+          "address": null
+        }
+      }
+    ]
+  },
+  "additional_data": {
+    "next_cursor": null
+  }
+}

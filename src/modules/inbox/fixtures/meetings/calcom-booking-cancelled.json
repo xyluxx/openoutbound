@@ -1,0 +1,22 @@
+{
+  "triggerEvent": "BOOKING_CANCELLED",
+  "createdAt": "2026-09-21T10:00:00.000Z",
+  "payload": {
+    "type": "20min",
+    "title": "Intro call between Helix Example and Dana Reyes",
+    "startTime": "2026-10-09T10:00:00Z",
+    "endTime": "2026-10-09T10:20:00Z",
+    "attendees": [
+      {
+        "email": "dana.private@example.net",
+        "name": "Dana Reyes",
+        "timeZone": "Europe/Berlin"
+      }
+    ],
+    "uid": "calcom-uid-0002",
+    "bookingId": 101,
+    "cancellationReason": "Something came up",
+    "metadata": { "oo_ref": "bkdana000001" },
+    "status": "CANCELLED"
+  }
+}

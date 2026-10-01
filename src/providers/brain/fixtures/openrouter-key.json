@@ -1,0 +1,9 @@
+{
+  "data": {
+    "label": "OpenOutbound test key",
+    "usage": 1.5,
+    "limit": 20,
+    "limit_remaining": 18.5,
+    "is_free_tier": false
+  }
+}

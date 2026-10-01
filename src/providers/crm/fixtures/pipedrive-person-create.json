@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "data": {
+    "id": 8,
+    "name": "Dana Reyes",
+    "emails": [
+      {
+        "value": "dana@harbor-dental.example.com",
+        "primary": true,
+        "label": "work"
+      }
+    ],
+    "org_id": 13,
+    "add_time": "2026-09-27T14:31:48Z"
+  }
+}

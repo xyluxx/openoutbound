@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>OpenOutbound banner</title>
+<!--
+  THESIS: OpenOutbound is the outbound engine an agent drives and cannot break; the hero shows one calm agent session that ends at a human approval.
+  OWN-WORLD: the canon of premium developer tools, chosen by the owner: Linear and Vercel in dark, Apple and Notion in light.
+  STORY: an agent asks, the engine finds leads, reads signals, writes and checks drafts, then stops and waits for a person.
+  FIRST VIEWPORT: name, promise, one line on why it is safe, and the session panel with the approval as its last visible step.
+  FORM: seed 6fa5e12c, canon chosen by the owner. Geist and Geist Mono, monochrome with status colors only, one light source from above in dark, soft offset shadows in light.
+  FINISH: every string true to the product, contrast at AA, no gradient text, no eyebrow labels, no decorative glass, shadows with offset and blur.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=block" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<script>
+  const params = new URLSearchParams(location.search);
+  document.documentElement.dataset.theme = params.get("theme") === "light" ? "light" : "dark";
+  if (params.get("bg") === "github") document.documentElement.dataset.page = "github";
+</script>
+<style>
+  .canvas {
+    position: relative;
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--bg);
+  }
+
+  /* One light source above the page (dark only; transparent in light). */
+  .room {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(50% 36% at 50% 28%, var(--room-light), transparent 72%);
+  }
+
+  .bar {
+    position: absolute;
+    top: 40px;
+    left: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .lockup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .hero {
+    position: absolute;
+    top: 98px;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 60px;
+    line-height: 1.04;
+    font-weight: 600;
+    letter-spacing: -0.038em;
+  }
+
+  .sub {
+    margin-top: 20px;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--fg-2);
+    letter-spacing: -0.006em;
+  }
+
+  .stage {
+    position: absolute;
+    top: 318px;
+    left: 50%;
+    width: 880px;
+    transform: translateX(-50%);
+  }
+
+  .panel {
+    position: relative;
+    padding-bottom: 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-panel);
+    background: linear-gradient(180deg, var(--panel-top), var(--panel) 140px);
+    box-shadow: var(--shadow-panel);
+  }
+
+  /* The top edge catches the light. */
+  .panel::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 16%;
+    right: 16%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--edge-light), transparent);
+  }
+
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+
+  .workspace {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+  }
+
+  .tag {
+    padding: 1px 8px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--fg-2);
+  }
+
+  .connection {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--fg-2);
+  }
+
+  .connection::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  .prompt {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    column-gap: 14px;
+    align-items: baseline;
+    margin-bottom: 8px;
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid var(--line);
+    font-size: 15.5px;
+    font-weight: 500;
+    letter-spacing: -0.008em;
+  }
+
+  .prompt .caret {
+    color: var(--fg-2);
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .steps {
+    position: relative;
+    list-style: none;
+    padding: 0 20px;
+  }
+
+  /* A quiet thread through the finished steps. */
+  .steps::before {
+    content: "";
+    position: absolute;
+    left: 27.5px;
+    top: 22px;
+    height: 88px;
+    width: 1px;
+    background: var(--line-strong);
+  }
+
+  .step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 16px 160px 1fr auto;
+    column-gap: 14px;
+    align-items: center;
+    height: 44px;
+  }
+
+  .status {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--panel);
+  }
+
+  .step code {
+    font-family: var(--font-mono);
+    font-size: 14.5px;
+    color: var(--fg-code);
+  }
+
+  .result {
+    font-size: 15px;
+    letter-spacing: -0.006em;
+  }
+
+  .step.waiting {
+    height: auto;
+    margin: 10px -10px 0;
+    padding: 14px 10px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--sunk);
+  }
+
+  .step.waiting .status {
+    background: transparent;
+  }
+
+  .ask strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.006em;
+  }
+
+  .ask span {
+    display: block;
+    margin-top: 2px;
+    font-size: 15px;
+    color: var(--fg-2);
+  }
+
+  .actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 14px;
+    border-radius: var(--radius-control);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .button.secondary {
+    border: 1px solid var(--line-strong);
+    color: var(--fg);
+  }
+
+  .button.primary {
+    background: var(--button-bg);
+    color: var(--button-fg);
+  }
+
+</style>
+</head>
+<body>
+<main class="canvas">
+  <div class="room" aria-hidden="true"></div>
+
+  <header class="bar">
+    <div class="lockup">
+      <svg class="mark" viewBox="0 0 64 64" width="24" height="24" aria-hidden="true"><circle cx="27.5" cy="36.5" r="17" fill="none" stroke="currentColor" stroke-width="8"/><circle cx="50.5" cy="13.5" r="7" fill="currentColor"/></svg>
+      OpenOutbound
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>The AI SDR engine<br>any agent can drive.</h1>
+    <p class="sub">Open source and self-hosted. Limits and approvals live in code, not in prompts.</p>
+  </section>
+
+  <div class="stage">
+    <div class="panel">
+      <div class="head">
+        <div class="workspace">Northwind Analytics <span class="tag">Sandbox</span></div>
+        <div class="connection">Connected over MCP</div>
+      </div>
+
+      <div class="prompt">
+        <span class="caret mono">&rsaquo;</span>
+        <span>Find ops leaders at DTC brands that are hiring, then draft a first email.</span>
+      </div>
+
+      <ol class="steps">
+        <li class="step">
+          <svg class="status" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="var(--green-soft)" stroke="var(--green)" stroke-width="1.5"/><path d="M5 8.25 7 10.25 11 6" fill="none" stroke="var(--green)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <code>find_leads</code>
+          <span class="result">48 people at 31 companies fit your ICP</span>
+        </li>
+        <li class="step">
+          <svg class="status" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="var(--green-soft)" stroke="var(--green)" stroke-width="1.5"/><path d="M5 8.25 7 10.25 11 6" fill="none" stroke="var(--green)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <code>manage_signals</code>
+          <span class="result">12 of them are hiring for operations, each with a source</span>
+        </li>
+        <li class="step">
+          <svg class="status" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.25" fill="var(--green-soft)" stroke="var(--green)" stroke-width="1.5"/><path d="M5 8.25 7 10.25 11 6" fill="none" stroke="var(--green)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <code>preview_campaign</code>
+          <span class="result">5 sample emails written, all 5 passed the checker</span>
+        </li>
+        <li class="step waiting">
+          <svg class="status" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7.5" fill="var(--amber-soft)"/><circle cx="8" cy="8" r="3.5" fill="var(--amber)"/></svg>
+          <code>launch_campaign</code>
+          <div class="ask">
+            <strong>Waiting for your approval</strong>
+            <span>Nothing is sent until you approve.</span>
+          </div>
+          <div class="actions">
+            <span class="button secondary">Review drafts</span>
+            <span class="button primary">Approve</span>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "error": false,
+  "free_enrichment": true,
+  "person": {
+    "first_name": "Marco",
+    "email": {
+      "status": "VERIFIED",
+      "revealed": false,
+      "email": "marco.*****@northgate.example.org"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "data": {
+    "first_name": "Dana",
+    "last_name": "Rivers",
+    "email": "dana@brightsmile.example.com",
+    "score": 91,
+    "domain": "brightsmile.example.com",
+    "position": "Practice Owner",
+    "verification": { "date": "2026-09-01", "status": "accept_all" }
+  },
+  "meta": {
+    "params": { "first_name": "Dana", "last_name": "Rivers", "domain": "brightsmile.example.com" }
+  }
+}

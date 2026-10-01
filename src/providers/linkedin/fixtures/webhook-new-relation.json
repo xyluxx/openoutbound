@@ -1,0 +1,11 @@
+{
+  "event": "new_relation",
+  "account_id": "uni_acc_Sam01Example",
+  "account_type": "LINKEDIN",
+  "webhook_name": "openoutbound-users",
+  "user_full_name": "Rowan Vale",
+  "user_provider_id": "ACoAAExampleRowanVale0001",
+  "user_public_identifier": "rowan-vale-example",
+  "user_profile_url": "https://www.linkedin.com/in/rowan-vale-example",
+  "user_picture_url": null
+}

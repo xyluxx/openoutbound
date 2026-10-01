@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "data": {
+    "web": [
+      {
+        "url": "https://news.example.com/lumen-home-series-b",
+        "title": "Lumen Home Series B",
+        "description": "Lumen Home raised a Series B round.",
+        "position": 1
+      }
+    ]
+  }
+}

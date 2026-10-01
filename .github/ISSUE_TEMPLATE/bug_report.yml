@@ -1,0 +1,55 @@
+name: Bug report
+description: Something does not work as documented.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for the report. Please remove secrets, email addresses and personal data from logs before pasting.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The smallest set of commands or tool calls that shows the problem. The sandbox is ideal for this.
+      placeholder: |
+        1. openoutbound sandbox
+        2. openoutbound campaigns preview --campaign ...
+    validations:
+      required: true
+  - type: dropdown
+    id: door
+    attributes:
+      label: Where did it happen
+      options:
+        - MCP server
+        - CLI
+        - REST API
+        - Background worker
+        - Agent Skill
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Output of `openoutbound version`.
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: OS, Node version, database (PGlite or Postgres), AI brain provider, and the agent you use if relevant.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Relevant log lines with secrets removed.
+      render: text

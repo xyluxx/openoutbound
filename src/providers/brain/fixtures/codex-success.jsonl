@@ -1,0 +1,5 @@
+{"type":"thread.started","thread_id":"00000000-0000-4000-8000-000000000002"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"reasoning","text":"Drafting a short email."}}
+{"type":"item.completed","item":{"id":"item_1","type":"agent_message","text":"{\"subject\":\"Quick idea for Harbor Dental\",\"body\":\"Hi Dana, congrats on Lakeside.\",\"angle\":\"signal\",\"ps\":null}"}}
+{"type":"turn.completed","usage":{"input_tokens":5200,"cached_input_tokens":4096,"output_tokens":180,"reasoning_output_tokens":64}}

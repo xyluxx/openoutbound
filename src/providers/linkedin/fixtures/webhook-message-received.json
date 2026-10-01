@@ -1,0 +1,23 @@
+{
+  "event": "message_received",
+  "account_id": "uni_acc_Sam01Example",
+  "account_type": "LINKEDIN",
+  "account_info": {
+    "type": "LINKEDIN",
+    "feature": "classic",
+    "user_id": "ACoAAExampleSamSender0001"
+  },
+  "webhook_name": "openoutbound-messaging",
+  "chat_id": "chatExampleRowan0001",
+  "timestamp": "2026-09-22T14:10:00.000Z",
+  "message_id": "msgInboundExample04",
+  "message": "Sounds good, send me a calendar link.",
+  "sender": {
+    "attendee_id": "attendeeRowan01",
+    "attendee_name": "Rowan Vale",
+    "attendee_provider_id": "ACoAAExampleRowanVale0001",
+    "attendee_profile_url": "https://www.linkedin.com/in/rowan-vale-example"
+  },
+  "attendees": [],
+  "is_sender": false
+}

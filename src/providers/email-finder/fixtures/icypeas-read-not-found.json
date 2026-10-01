@@ -1,0 +1,7 @@
+{
+  "success": true,
+  "items": [
+    { "results": { "emails": [] }, "status": "DEBITED_NOT_FOUND", "_id": "p_exampleSearch0001" }
+  ],
+  "total": 1
+}

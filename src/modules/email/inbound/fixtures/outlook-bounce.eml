@@ -1,0 +1,40 @@
+From: Microsoft Outlook <MicrosoftExchange329e71ec88ae4615bbc36ab6ce41109e@brand.example.com>
+To: <sam@brand.example.com>
+Subject: Undeliverable: Quick question
+Message-ID: <dsn-outlook-1@prod.outlook.example.com>
+Date: Mon, 21 Sep 2026 15:06:00 +0000
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+	boundary="_outlook_boundary_"
+X-MS-Exchange-Message-Is-Ndr:
+Auto-Submitted: auto-replied
+
+--_outlook_boundary_
+Content-Type: text/plain; charset="us-ascii"
+
+Your message to ghost@bluefield.example.com couldn't be delivered.
+ghost wasn't found at bluefield.example.com.
+
+--_outlook_boundary_
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns;AM0PR01MB0000.eurprd01.prod.outlook.example.com
+Received-From-MTA: dns;AM0PR01MB0001.eurprd01.prod.outlook.example.com
+Arrival-Date: Mon, 21 Sep 2026 15:05:58 +0000
+
+Final-Recipient: rfc822;ghost@bluefield.example.com
+Action: failed
+Status: 5.1.10
+Diagnostic-Code: smtp;550 5.1.10 RESOLVER.ADR.RecipientNotFound; Recipient
+ ghost@bluefield.example.com not found by SMTP address lookup
+
+--_outlook_boundary_
+Content-Type: text/rfc822-headers
+
+From: Sam Carter <sam@brand.example.com>
+To: ghost@bluefield.example.com
+Subject: Quick question
+Message-ID: <orig-outlook@brand.example.com>
+Date: Mon, 21 Sep 2026 15:05:00 +0000
+
+--_outlook_boundary_--

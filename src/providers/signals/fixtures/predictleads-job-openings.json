@@ -1,0 +1,49 @@
+{
+  "data": [
+    {
+      "id": "4d5ac23c-0001-4000-8000-000000000001",
+      "type": "job_opening",
+      "attributes": {
+        "title": "Head of Sales Operations",
+        "url": "https://careers.northwind.example.com/jobs/101",
+        "first_seen_at": "2026-09-10T08:00:00Z",
+        "last_seen_at": "2026-09-18T08:00:00Z",
+        "categories": ["sales"],
+        "seniority": "head",
+        "location": "Berlin, Germany"
+      },
+      "relationships": {
+        "company": { "data": { "id": "c0000000-0000-4000-8000-000000000001", "type": "company" } }
+      }
+    },
+    {
+      "id": "4d5ac23c-0001-4000-8000-000000000002",
+      "type": "job_opening",
+      "attributes": {
+        "title": "Senior Backend Engineer",
+        "url": "https://careers.northwind.example.com/jobs/102",
+        "first_seen_at": "2026-09-12T08:00:00Z",
+        "categories": ["software_development"],
+        "seniority": "mid_senior",
+        "location": null
+      }
+    },
+    {
+      "id": "4d5ac23c-0001-4000-8000-000000000003",
+      "type": "job_opening",
+      "attributes": {
+        "title": "Office Manager",
+        "url": null,
+        "first_seen_at": "2026-09-13T08:00:00Z"
+      }
+    }
+  ],
+  "included": [
+    {
+      "id": "c0000000-0000-4000-8000-000000000001",
+      "type": "company",
+      "attributes": { "domain": "northwind.example.com", "company_name": "Northwind Example" }
+    }
+  ],
+  "meta": { "schema_version": "3.3", "record_state": "active" }
+}

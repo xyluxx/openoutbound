@@ -1,0 +1,11 @@
+{
+  "type": "result",
+  "subtype": "success",
+  "is_error": true,
+  "num_turns": 1,
+  "result": "Invalid API key. Please run /login",
+  "api_error_status": 401,
+  "total_cost_usd": 0,
+  "usage": { "input_tokens": 0, "output_tokens": 0 },
+  "modelUsage": {}
+}

@@ -1,0 +1,22 @@
+{
+  "requestId": "b5947044c4b78efa9552a7c89b306d95",
+  "results": [
+    {
+      "title": "Lumen Home opens Rotterdam warehouse",
+      "url": "https://news.example.com/lumen-home-rotterdam",
+      "publishedDate": "2026-09-10T08:00:00.000Z",
+      "highlights": [
+        "Lumen Home opened a warehouse in Rotterdam.",
+        "It serves customers in the Benelux."
+      ]
+    },
+    {
+      "title": "Dana Reyes on scaling DTC operations",
+      "url": "https://podcast.example.org/episodes/dana-reyes",
+      "publishedDate": null,
+      "summary": "Dana Reyes, VP Operations at Lumen Home, talks about stockouts."
+    }
+  ],
+  "resolvedSearchType": "neural",
+  "costDollars": { "total": 0.007, "search": { "neural": 0.007 } }
+}

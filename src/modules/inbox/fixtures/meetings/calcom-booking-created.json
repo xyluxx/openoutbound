@@ -1,0 +1,46 @@
+{
+  "triggerEvent": "BOOKING_CREATED",
+  "createdAt": "2026-09-19T12:00:00.000Z",
+  "payload": {
+    "type": "20min",
+    "title": "Intro call between Helix Example and Dana Reyes",
+    "description": "",
+    "additionalNotes": "",
+    "customInputs": {},
+    "startTime": "2026-10-06T15:00:00Z",
+    "endTime": "2026-10-06T15:20:00Z",
+    "organizer": {
+      "id": 5,
+      "name": "Sam Sender",
+      "email": "sam@helix.example.org",
+      "timeZone": "Europe/Berlin",
+      "language": { "locale": "en" }
+    },
+    "responses": {
+      "name": { "label": "your_name", "value": "Dana Reyes" },
+      "email": { "label": "email_address", "value": "dana.private@example.net" }
+    },
+    "userFieldsResponses": {},
+    "attendees": [
+      {
+        "email": "dana.private@example.net",
+        "name": "Dana Reyes",
+        "timeZone": "Europe/Berlin",
+        "language": { "locale": "en" }
+      }
+    ],
+    "location": "integrations:daily",
+    "destinationCalendar": null,
+    "hideCalendarNotes": false,
+    "requiresConfirmation": null,
+    "eventTypeId": 7,
+    "seatsShowAttendees": true,
+    "uid": "calcom-uid-0001",
+    "bookingId": 100,
+    "metadata": {
+      "videoCallUrl": "https://app.cal.com/video/calcom-uid-0001",
+      "oo_ref": "bkdana000001"
+    },
+    "status": "ACCEPTED"
+  }
+}

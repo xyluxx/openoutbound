@@ -1,0 +1,10 @@
+{
+  "results": [
+    {
+      "url": "https://lumenhome.example.com/about",
+      "raw_content": "# About Lumen Home\n\nLighting for small apartments."
+    }
+  ],
+  "failed_results": [],
+  "response_time": 0.9
+}

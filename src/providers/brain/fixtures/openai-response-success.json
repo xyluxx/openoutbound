@@ -1,0 +1,43 @@
+{
+  "id": "resp_01HarborDentalExample",
+  "object": "response",
+  "created_at": 1790000000,
+  "status": "completed",
+  "error": null,
+  "incomplete_details": null,
+  "instructions": "You write short cold emails.",
+  "max_output_tokens": 9000,
+  "model": "gpt-5-mini-2026-08-01",
+  "output": [
+    { "id": "rs_01Example", "type": "reasoning", "summary": [] },
+    {
+      "id": "msg_01Example",
+      "type": "message",
+      "status": "completed",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\"subject\":\"Quick idea for Harbor Dental\",\"body\":\"Hi Dana, saw the Lakeside opening.\",\"angle\":\"signal\",\"ps\":null}",
+          "annotations": []
+        }
+      ]
+    }
+  ],
+  "parallel_tool_calls": true,
+  "store": false,
+  "temperature": 1,
+  "text": {
+    "format": { "type": "json_schema", "name": "email_draft", "strict": true, "schema": {} }
+  },
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 1,
+  "usage": {
+    "input_tokens": 800,
+    "input_tokens_details": { "cached_tokens": 512, "cache_write_tokens": 0 },
+    "output_tokens": 300,
+    "output_tokens_details": { "reasoning_tokens": 128 },
+    "total_tokens": 1100
+  }
+}

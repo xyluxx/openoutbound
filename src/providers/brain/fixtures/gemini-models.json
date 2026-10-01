@@ -1,0 +1,17 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "models/gemini-3.8-flash",
+      "object": "model",
+      "created": 1790000000,
+      "owned_by": "google"
+    },
+    {
+      "id": "models/gemini-3.5-flash-lite",
+      "object": "model",
+      "created": 1790000000,
+      "owned_by": "google"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"00000000-0000-4000-8000-000000000004"}
+{"type":"turn.started"}
+{"type":"error","message":"unexpected status 401 Unauthorized: Missing bearer or basic authentication in header"}
+{"type":"turn.failed","error":{"message":"unexpected status 401 Unauthorized: Missing bearer or basic authentication in header"}}

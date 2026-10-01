@@ -1,0 +1,8 @@
+{
+  "email": "hello@northgate.example.org",
+  "status": "catch_all",
+  "overall_score": 60,
+  "is_role_account": true,
+  "is_catch_all": true,
+  "verification_mode": "power"
+}

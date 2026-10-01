@@ -1,0 +1,12 @@
+{
+  "success": false,
+  "validationErrors": [
+    {
+      "expected": "string",
+      "actual": null,
+      "type": "required",
+      "field": "domainOrCompany",
+      "message": "validation_required"
+    }
+  ]
+}

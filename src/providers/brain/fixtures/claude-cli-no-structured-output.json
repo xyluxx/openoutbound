@@ -1,0 +1,10 @@
+{
+  "type": "result",
+  "subtype": "success",
+  "is_error": false,
+  "num_turns": 1,
+  "result": "Here is a draft: Hi Dana, congrats on the Lakeside clinic.",
+  "total_cost_usd": 0.004,
+  "usage": { "input_tokens": 900, "output_tokens": 60 },
+  "modelUsage": {}
+}

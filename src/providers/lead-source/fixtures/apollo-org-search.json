@@ -1,0 +1,34 @@
+{
+  "breadcrumbs": [],
+  "partial_results_only": false,
+  "pagination": { "page": 1, "per_page": 2, "total_entries": 3, "total_pages": 2 },
+  "organizations": [
+    {
+      "id": "615d029256de500001bdb460",
+      "name": "Brightsmile Dental Studio",
+      "website_url": "http://www.brightsmile.example.com",
+      "linkedin_url": "http://www.linkedin.com/company/brightsmile-dental-example",
+      "primary_phone": {
+        "number": "+1 512-555-0101",
+        "source": "Account",
+        "sanitized_number": "+15125550101"
+      },
+      "founded_year": 2011,
+      "primary_domain": "brightsmile.example.com",
+      "industry": "medical practice",
+      "estimated_num_employees": 24,
+      "city": "Austin",
+      "state": "Texas",
+      "country": "United States",
+      "technology_names": ["WordPress", "Google Analytics"],
+      "show_intent": false
+    },
+    {
+      "id": "615d029256de500001bdb461",
+      "name": "Northgate Family Dentistry",
+      "website_url": "https://northgate.example.org/",
+      "founded_year": 1998
+    },
+    { "id": "615d029256de500001bdb462" }
+  ]
+}

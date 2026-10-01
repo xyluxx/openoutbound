@@ -1,0 +1,16 @@
+{
+  "total": 1,
+  "results": [
+    {
+      "id": "8462427879",
+      "properties": {
+        "domain": "harbor-dental.example.com",
+        "name": "Harbor Dental",
+        "hs_object_id": "8462427879"
+      },
+      "createdAt": "2026-09-01T10:00:00.000Z",
+      "updatedAt": "2026-09-20T10:00:00.000Z",
+      "archived": false
+    }
+  ]
+}

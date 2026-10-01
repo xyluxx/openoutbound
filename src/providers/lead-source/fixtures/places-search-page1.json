@@ -1,0 +1,51 @@
+{
+  "places": [
+    {
+      "id": "ChIJexample0000000000000001",
+      "types": ["dentist", "health", "point_of_interest", "establishment"],
+      "primaryType": "dentist",
+      "displayName": { "text": "Brightsmile Dental Studio", "languageCode": "en" },
+      "formattedAddress": "100 Example Ave, Austin, TX 78701, USA",
+      "addressComponents": [
+        { "longText": "100", "shortText": "100", "types": ["street_number"] },
+        { "longText": "Example Avenue", "shortText": "Example Ave", "types": ["route"] },
+        { "longText": "Austin", "shortText": "Austin", "types": ["locality", "political"] },
+        {
+          "longText": "Texas",
+          "shortText": "TX",
+          "types": ["administrative_area_level_1", "political"]
+        },
+        { "longText": "United States", "shortText": "US", "types": ["country", "political"] },
+        { "longText": "78701", "shortText": "78701", "types": ["postal_code"] }
+      ],
+      "location": { "latitude": 30.2672, "longitude": -97.7431 },
+      "rating": 4.8,
+      "userRatingCount": 212,
+      "businessStatus": "OPERATIONAL",
+      "nationalPhoneNumber": "(512) 555-0101",
+      "internationalPhoneNumber": "+1 512-555-0101",
+      "websiteUri": "https://www.brightsmile.example.com/?utm_source=gmb"
+    },
+    {
+      "id": "ChIJexample0000000000000002",
+      "types": ["dentist", "health"],
+      "primaryType": "dentist",
+      "displayName": { "text": "Lakeview Orthodontics", "languageCode": "en" },
+      "formattedAddress": "22 Sample St, Austin, TX 78702, USA",
+      "location": { "latitude": 30.2701, "longitude": -97.7302 },
+      "rating": 4.1,
+      "userRatingCount": 18,
+      "businessStatus": "OPERATIONAL"
+    },
+    {
+      "id": "ChIJexample0000000000000003",
+      "types": ["dentist"],
+      "displayName": { "text": "Closed Smiles Dental", "languageCode": "en" },
+      "formattedAddress": "9 Gone Rd, Austin, TX 78703, USA",
+      "location": { "latitude": 30.2801, "longitude": -97.7502 },
+      "businessStatus": "CLOSED_PERMANENTLY",
+      "websiteUri": "https://closed.example.org/"
+    }
+  ],
+  "nextPageToken": "page-token-2"
+}

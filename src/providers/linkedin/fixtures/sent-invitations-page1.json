@@ -1,0 +1,29 @@
+{
+  "object": "UserInvitationList",
+  "items": [
+    {
+      "object": "UserInvitation",
+      "id": "7371000000000000011",
+      "date": "2026-08-25T09:00:00.000Z",
+      "parsed_datetime": "2026-08-25T09:00:00.000Z",
+      "invitation_text": "Hi Rowan, glad to connect.",
+      "invited_user": "Rowan Vale",
+      "invited_user_id": "ACoAAExampleRowanVale0001",
+      "invited_user_public_id": "rowan-vale-example",
+      "invited_user_description": "Head of Operations"
+    },
+    {
+      "object": "UserInvitation",
+      "id": "7371000000000000012",
+      "date": "3w",
+      "invited_user_id": "ACoAAExampleJuneOkafor002",
+      "invited_user_public_id": "june-okafor-example"
+    },
+    {
+      "object": "UserInvitation",
+      "date": "1d",
+      "invitation_text": "Entry without ids is ignored"
+    }
+  ],
+  "cursor": "cursor-invitations-2"
+}

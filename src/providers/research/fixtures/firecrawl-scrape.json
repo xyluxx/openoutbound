@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "data": {
+    "markdown": "# About Lumen Home\n\nLighting for small apartments.",
+    "metadata": {
+      "title": "About Lumen Home",
+      "sourceURL": "https://lumenhome.example.com/about",
+      "statusCode": 200
+    }
+  }
+}

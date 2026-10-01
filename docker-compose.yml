@@ -1,0 +1,44 @@
+# OpenOutbound with Postgres. Quick start:
+#   cp .env.example .env
+#   echo "OPENOUTBOUND_SECRET_KEY=$(openssl rand -base64 32)" >> .env
+#   docker compose up -d
+#   docker compose exec engine node dist/cli/main.js keys create --name my-agent --kind agent
+# The API and MCP endpoint listen on http://127.0.0.1:7331 (REST under /v1, MCP at /mcp).
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: openoutbound
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-openoutbound}
+      POSTGRES_DB: openoutbound
+    volumes:
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U openoutbound -d openoutbound"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  engine:
+    build: .
+    image: openoutbound:local
+    restart: unless-stopped
+    command: ["serve"]
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: postgres://openoutbound:${POSTGRES_PASSWORD:-openoutbound}@postgres:5432/openoutbound
+      HOST: 0.0.0.0
+      PORT: 7331
+      OPENOUTBOUND_BASE_URL: ${OPENOUTBOUND_BASE_URL:-http://localhost:7331}
+    ports:
+      - "127.0.0.1:7331:7331"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:

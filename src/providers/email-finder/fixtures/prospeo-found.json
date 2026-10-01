@@ -1,0 +1,22 @@
+{
+  "error": false,
+  "free_enrichment": false,
+  "person": {
+    "person_id": "aaaa0000example0000000001",
+    "first_name": "Dana",
+    "last_name": "Rivers",
+    "linkedin_url": "https://www.linkedin.com/in/dana-rivers-example",
+    "current_job_title": "Practice Owner",
+    "email": {
+      "status": "VERIFIED",
+      "revealed": true,
+      "email": "dana.rivers@brightsmile.example.com"
+    },
+    "mobile": { "status": "VERIFIED", "revealed": false }
+  },
+  "company": {
+    "name": "Brightsmile Dental Studio",
+    "domain": "brightsmile.example.com",
+    "employee_range": "11-50"
+  }
+}

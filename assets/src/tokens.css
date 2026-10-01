@@ -1,0 +1,100 @@
+/*
+  OpenOutbound brand tokens. One file for every brand image.
+  Dark sits next to Linear and Vercel, light next to Apple and Notion.
+  Pages set <html data-theme="dark|light"> from ?theme= in the URL, and
+  data-page="github" from ?bg=github for README images that sit on GitHub's dark page.
+*/
+
+:root {
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --radius-panel: 16px;
+  --radius-control: 8px;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0a0a0b;
+  --fg: #ededef;
+  --fg-2: #8f8f99;
+  --line: rgb(255 255 255 / 0.08);
+  --line-strong: rgb(255 255 255 / 0.14);
+  --panel: #111113;
+  --panel-top: #151518;
+  --sunk: rgb(255 255 255 / 0.035);
+  --green: #3dd68c;
+  --green-soft: rgb(61 214 140 / 0.14);
+  --amber: #f5b03d;
+  --amber-soft: rgb(245 176 61 / 0.16);
+  --button-bg: #ededef;
+  --button-fg: #0a0a0b;
+  --fg-code: #b4b4bc;
+  --wire: #5a5a62;
+  --chip: rgb(255 255 255 / 0.07);
+  --shadow-panel: 0 24px 48px -20px rgb(0 0 0 / 0.55);
+  --edge-light: rgb(255 255 255 / 0.55);
+  --room-light: rgb(226 232 255 / 0.14);
+}
+
+/* GitHub's dark page, so README images have no visible edge there. */
+:root[data-theme="dark"][data-page="github"] {
+  --bg: #0d1117;
+  --panel: #12161d;
+  --panel-top: #161b23;
+  --button-fg: #0d1117;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #ffffff;
+  --fg: #1d1d1f;
+  --fg-2: #6e6e73;
+  --line: #e8e8ed;
+  --line-strong: #d2d2d7;
+  --panel: #ffffff;
+  --panel-top: #ffffff;
+  --sunk: #f5f5f7;
+  --green: #1e8e4e;
+  --green-soft: rgb(30 142 78 / 0.1);
+  --amber: #c47a00;
+  --amber-soft: rgb(196 122 0 / 0.12);
+  --button-bg: #1d1d1f;
+  --button-fg: #ffffff;
+  --fg-code: #4a4a50;
+  --wire: #8e8e93;
+  --chip: #ffffff;
+  --shadow-panel:
+    0 1px 2px rgb(0 0 0 / 0.04), 0 8px 16px -8px rgb(0 0 0 / 0.08),
+    0 32px 64px -24px rgb(0 0 0 / 0.16);
+  --edge-light: transparent;
+  --room-light: transparent;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--bg);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0;
+}
+
+/* The mark: a ring, and the dot that has left it. */
+.mark {
+  display: block;
+  flex: none;
+}

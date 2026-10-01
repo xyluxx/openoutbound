@@ -1,0 +1,48 @@
+{
+  "object": "PostList",
+  "items": [
+    {
+      "object": "Post",
+      "provider": "LINKEDIN",
+      "id": "7370000000000000001",
+      "social_id": "urn:li:activity:7370000000000000001",
+      "share_url": "https://www.linkedin.com/posts/rowan-vale-example_activity-7370000000000000001",
+      "text": "We cut onboarding time in half this quarter. Here is what changed.",
+      "date": "2026-09-20T08:00:00.000Z",
+      "parsed_datetime": "2026-09-20T08:00:00.000Z",
+      "reaction_counter": 42,
+      "comment_counter": 7,
+      "repost_counter": 2,
+      "impressions_counter": 1800,
+      "author": {
+        "id": "ACoAAExampleRowanVale0001",
+        "public_identifier": "rowan-vale-example",
+        "name": "Rowan Vale",
+        "is_company": false
+      },
+      "is_repost": false
+    },
+    {
+      "object": "Post",
+      "provider": "LINKEDIN",
+      "id": "7370000000000000002",
+      "social_id": "urn:li:activity:7370000000000000002",
+      "text": "Sharing a good read from a colleague.",
+      "date": "1w",
+      "reaction_counter": 3,
+      "comment_counter": 0,
+      "is_repost": true
+    },
+    {
+      "object": "Post",
+      "provider": "LINKEDIN",
+      "id": "7370000000000000003",
+      "text": "We are hiring two operations analysts in Austin.",
+      "date": "3d",
+      "reaction_counter": 11,
+      "comment_counter": 1,
+      "is_repost": false
+    }
+  ],
+  "cursor": null
+}

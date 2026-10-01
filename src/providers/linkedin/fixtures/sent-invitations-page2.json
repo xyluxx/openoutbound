@@ -1,0 +1,13 @@
+{
+  "object": "UserInvitationList",
+  "items": [
+    {
+      "object": "UserInvitation",
+      "id": "7371000000000000013",
+      "parsed_datetime": "2026-09-10T09:00:00.000Z",
+      "invited_user_id": "ACoAAExampleLeeMarsh00003",
+      "invited_user_public_id": "lee-marsh-example"
+    }
+  ],
+  "cursor": null
+}

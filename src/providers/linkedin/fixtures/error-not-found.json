@@ -1,0 +1,6 @@
+{
+  "status": 404,
+  "type": "errors/resource_not_found",
+  "title": "Resource not found.",
+  "detail": "The requested user could not be found."
+}

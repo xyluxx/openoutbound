@@ -1,0 +1,28 @@
+{
+  "id": "gen-01HarborDentalExample",
+  "object": "chat.completion",
+  "created": 1790000000,
+  "model": "examplevendor/example-large",
+  "provider": "ExampleCloud",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "logprobs": null,
+      "message": {
+        "role": "assistant",
+        "content": "{\"subject\":\"Quick idea for Harbor Dental\",\"body\":\"Hi Dana, congrats on Lakeside.\",\"angle\":\"signal\",\"ps\":null}",
+        "refusal": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 900,
+    "completion_tokens": 200,
+    "total_tokens": 1100,
+    "cost": 0.00123,
+    "prompt_tokens_details": { "cached_tokens": 256 },
+    "completion_tokens_details": { "reasoning_tokens": 0 }
+  }
+}

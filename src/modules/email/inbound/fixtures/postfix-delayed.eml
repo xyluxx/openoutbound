@@ -1,0 +1,42 @@
+Return-Path: <>
+From: MAILER-DAEMON@mail.brand.example.com (Mail Delivery System)
+Subject: Delayed Mail (still being retried)
+To: sam@brand.example.com
+Auto-Submitted: auto-replied
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+	boundary="9A8B7C6D5E.1758470000/mail.brand.example.com"
+Message-Id: <20260921160000.9A8B7C6D5E@mail.brand.example.com>
+Date: Mon, 21 Sep 2026 16:00:00 +0000 (UTC)
+
+--9A8B7C6D5E.1758470000/mail.brand.example.com
+Content-Description: Notification
+Content-Type: text/plain; charset=us-ascii
+
+This is the mail system at host mail.brand.example.com.
+
+####################################################################
+# THIS IS A WARNING ONLY.  YOU DO NOT NEED TO RESEND YOUR MESSAGE. #
+####################################################################
+
+--9A8B7C6D5E.1758470000/mail.brand.example.com
+Content-Description: Delivery report
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; mail.brand.example.com
+
+Final-Recipient: rfc822; slow@cedar.example.org
+Action: delayed
+Status: 4.4.1
+Diagnostic-Code: X-Postfix; connect to mx.cedar.example.org[192.0.2.20]:25: Connection timed out
+
+--9A8B7C6D5E.1758470000/mail.brand.example.com
+Content-Description: Undelivered Message Headers
+Content-Type: text/rfc822-headers
+
+From: Sam Carter <sam@brand.example.com>
+To: slow@cedar.example.org
+Subject: Quick question
+Message-ID: <orig-delayed@brand.example.com>
+
+--9A8B7C6D5E.1758470000/mail.brand.example.com--

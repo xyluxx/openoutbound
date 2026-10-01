@@ -1,0 +1,6 @@
+{
+  "status": 400,
+  "type": "errors/checkpoint_error",
+  "title": "Checkpoint error",
+  "detail": "A check must be completed on LinkedIn before continuing."
+}

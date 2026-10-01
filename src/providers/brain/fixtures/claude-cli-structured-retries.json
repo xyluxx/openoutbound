@@ -1,0 +1,10 @@
+{
+  "type": "result",
+  "subtype": "error_max_structured_output_retries",
+  "is_error": true,
+  "num_turns": 3,
+  "total_cost_usd": 0.02,
+  "usage": { "input_tokens": 4000, "output_tokens": 900 },
+  "modelUsage": {},
+  "errors": ["Structured output did not match the schema after 3 attempts"]
+}
