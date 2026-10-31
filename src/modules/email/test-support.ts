@@ -8,10 +8,28 @@ import { and, eq, inArray } from "drizzle-orm";
 import { type OpContext, requireWorkspace } from "../../core/context.js";
 import type { PersonStatus, SuppressionReason, SuppressionType } from "../../core/enums.js";
 import { people, suppressions } from "../../db/schema/index.js";
+import {
+  addressSourceOf,
+  COLD_EMAIL_CODES,
+  cachedClearance,
+  clearanceInputs,
+  recipientNameOf,
+  recordEmailClearance,
+} from "../leads/cold-email.js";
+import { countryFromEmail } from "../leads/tld-country.js";
 
 const BLOCKED: PersonStatus[] = ["unsubscribed", "bounced", "do_not_contact"];
 
 export const fakeLeadsService = {
+  // The cold email check's record on a person is the real thing: it only touches the people row.
+  addressSourceOf,
+  cachedClearance,
+  clearanceInputs,
+  COLD_EMAIL_CODES,
+  countryFromEmail,
+  recipientNameOf,
+  recordEmailClearance,
+
   async checkContactable(
     ctx: OpContext,
     input: { personId: string; channel: "email" | "linkedin" },

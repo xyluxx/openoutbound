@@ -84,6 +84,15 @@ export async function setPersonStatus(
 
 // --- Helpers (not part of the binding contract): the enrichment module (same owner), and the
 // seniority vocabulary, so the knowledge bootstrap suggests ICPs as manage_icp stores them.
+// The cold email check's record on a person, for the send job (email module).
+export {
+  addressSourceOf,
+  COLD_EMAIL_CODES,
+  cachedClearance,
+  clearanceInputs,
+  recipientNameOf,
+  recordEmailClearance,
+} from "./cold-email.js";
 export {
   checkContactableMany,
   companyBlockReasons,
@@ -117,3 +126,4 @@ export {
   normalizeWebsite,
 } from "./normalize.js";
 export { loadCompanies, loadCompany, loadPeople, loadPerson } from "./records.js";
+export { countryFromEmail } from "./tld-country.js";

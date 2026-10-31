@@ -2,14 +2,16 @@
  * Email checks in the send job's order (email/send-job.ts runs them through the gate): the
  * recipient, the mailbox state and provider throttle (moved or waited out by the job's
  * move-or-wait planning), suppressions and contactability with a send-time re-verification and
- * open privacy requests, a late message outside its window, the daily cap, the subject, then
- * the unsubscribe link (held without a public base URL). In the views the same checks also say
- * where and when a move lands; they reserve nothing.
+ * open privacy requests, a late message outside its window, the daily cap, the subject, the
+ * unsubscribe link (held without a public base URL), then the cold email check (the compliance
+ * provider's verdict before the first email). In the views the same checks also say where and
+ * when a move lands; they reserve nothing.
  */
 import type { CampaignSettings } from "../../core/settings.js";
 import type { Mailbox } from "../../db/schema/index.js";
 import { recipientTimeZone } from "../campaigns/timezones.js";
 import { rampLimit } from "../email/capacity.js";
+import { COLD_EMAIL_CHECK_FAILED } from "../email/cold-email-check.js";
 import { singleRecipient } from "../email/compose.js";
 import { holdsQueuedMail, throttledUntil } from "../email/mailbox-state.js";
 import { anytimeSchedule } from "../email/message-context.js";
@@ -23,6 +25,7 @@ import {
   unsubscribeLinkKey,
 } from "../email/unsubscribe-hold.js";
 import { isBlockingReason } from "../inbox/send.js";
+import { COLD_EMAIL_CODES } from "../leads/service.js";
 import { type BlockerFacts, blocker } from "./blockers.js";
 import {
   aiBudget,
@@ -500,6 +503,51 @@ export const unsubscribeLink: EligibilityCheck = {
   },
 };
 
+/**
+ * The cold email check: right before the first email to a person, the sender asks the
+ * compliance provider whether a cold email may go to the address and stores the verdict on the
+ * person (email/cold-email-check.ts). Last, so a check is only spent on an email that would go
+ * out now. A verdict that is not ok_to_email skips the email with the provider's words and
+ * receipt; a check that could not run holds it until `retry_at` (the send job opens a
+ * `sending_blocked` problem that says why). The views never ask: a stored verdict reaches them
+ * through contactability (leads/cold-email.ts).
+ */
+export const coldEmailCheck: EligibilityCheck = {
+  name: "cold_email_check",
+  async run(state) {
+    const hook = state.mode === "send" ? state.hooks.coldEmailCheck : undefined;
+    const { person, message, recipient } = state;
+    if (!hook || !person || !message || !recipient || state.replyMode) return null;
+    const outcome = await hook({ person, company: state.company, recipient, message });
+    if (!outcome || outcome.kind === "clear") return null;
+    if (outcome.kind === "held") {
+      const code = COLD_EMAIL_CODES[outcome.verdict];
+      const receipt = outcome.receipt_id ? ` (receipt ${outcome.receipt_id})` : "";
+      const item = blocker(code, {
+        ...state.facts,
+        detail: `${outcome.reason ?? ""}${receipt}`.trim() || null,
+        nextStep: outcome.next_step,
+      });
+      const words = [outcome.reason, outcome.next_step].filter(Boolean).join(" ");
+      return one(
+        gated(item, "skip", {
+          detail: `${code}: ${words || "no reason given"}${receipt}`.slice(0, 500),
+        }),
+      );
+    }
+    const item = blocker(COLD_EMAIL_CHECK_FAILED, {
+      ...state.facts,
+      detail: outcome.message,
+      nextStep: outcome.hint,
+      until: outcome.retry_at,
+      zone: workspaceZone(state),
+    });
+    return one(
+      gated(item, "wait", { retry_at: outcome.retry_at.toISOString(), detail: outcome.message }),
+    );
+  },
+};
+
 /** Every email check, in the send job's order. */
 export const EMAIL_CHECKS: readonly EligibilityCheck[] = [
   messageState,
@@ -517,4 +565,5 @@ export const EMAIL_CHECKS: readonly EligibilityCheck[] = [
   dailyCap,
   emailSubject,
   unsubscribeLink,
+  coldEmailCheck,
 ];

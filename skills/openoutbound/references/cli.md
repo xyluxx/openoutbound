@@ -2618,7 +2618,7 @@ Lists every provider plug-in (AI brains, lead sources, email finders and verifie
 
 | Flag | Type | Required | Description |
 | --- | --- | --- | --- |
-| `--slot` | `brain` \| `lead_source` \| `email_finder` \| `email_verifier` \| `research` \| `signals` \| `linkedin` \| `social` \| `crm` | no | Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm |
+| `--slot` | `brain` \| `lead_source` \| `email_finder` \| `email_verifier` \| `compliance` \| `research` \| `signals` \| `linkedin` \| `social` \| `crm` | no | Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm |
 | `--response-format` | `concise` \| `detailed` | no | concise = key fields only (default); detailed = every field |
 
 Example (Research providers): `--input '{"slot":"research"}'`
@@ -2631,7 +2631,7 @@ Lists the providers that serve each slot for this workspace, in priority order, 
 
 | Flag | Type | Required | Description |
 | --- | --- | --- | --- |
-| `--slot` | `brain` \| `lead_source` \| `email_finder` \| `email_verifier` \| `research` \| `signals` \| `linkedin` \| `social` \| `crm` | no | Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm |
+| `--slot` | `brain` \| `lead_source` \| `email_finder` \| `email_verifier` \| `compliance` \| `research` \| `signals` \| `linkedin` \| `social` \| `crm` | no | Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm |
 | `--response-format` | `concise` \| `detailed` | no | concise = key fields only (default); detailed = every field |
 
 Example (Everything configured): `--input '{}'`
@@ -2644,7 +2644,7 @@ Deletes a provider setting and its stored secrets for this workspace (or instanc
 
 | Flag | Type | Required | Description |
 | --- | --- | --- | --- |
-| `--slot` | `brain` \| `lead_source` \| `email_finder` \| `email_verifier` \| `research` \| `signals` \| `linkedin` \| `social` \| `crm` | yes | Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm |
+| `--slot` | `brain` \| `lead_source` \| `email_finder` \| `email_verifier` \| `compliance` \| `research` \| `signals` \| `linkedin` \| `social` \| `crm` | yes | Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm |
 | `--provider` | string | yes |  |
 | `--level` | `workspace` \| `instance` | no |  |
 
@@ -2658,7 +2658,7 @@ Configures a provider for this workspace (or instance-wide with level instance):
 
 | Flag | Type | Required | Description |
 | --- | --- | --- | --- |
-| `--slot` | `brain` \| `lead_source` \| `email_finder` \| `email_verifier` \| `research` \| `signals` \| `linkedin` \| `social` \| `crm` | yes | Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm |
+| `--slot` | `brain` \| `lead_source` \| `email_finder` \| `email_verifier` \| `compliance` \| `research` \| `signals` \| `linkedin` \| `social` \| `crm` | yes | Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm |
 | `--provider` | string | yes | Provider id from the catalog, e.g. anthropic, apollo, exa |
 | `--level` | `workspace` \| `instance` | no | workspace (default when a workspace is given) or instance |
 | `--secrets` | object | no | Secret values by key, e.g. { "api_key": "..." }. Stored encrypted, never returned |
@@ -2677,7 +2677,7 @@ Runs the provider's cheap live check (never spends credits) and reports ok, a on
 
 | Flag | Type | Required | Description |
 | --- | --- | --- | --- |
-| `--slot` | `brain` \| `lead_source` \| `email_finder` \| `email_verifier` \| `research` \| `signals` \| `linkedin` \| `social` \| `crm` | yes | Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm |
+| `--slot` | `brain` \| `lead_source` \| `email_finder` \| `email_verifier` \| `compliance` \| `research` \| `signals` \| `linkedin` \| `social` \| `crm` | yes | Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm |
 | `--provider` | string | no |  |
 | `--response-format` | `concise` \| `detailed` | no | concise = key fields only (default); detailed = every field |
 

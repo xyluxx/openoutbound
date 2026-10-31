@@ -1644,7 +1644,7 @@ Annotations: idempotent.
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `slot` | `brain` \| `lead_source` \| `email_finder` \| `email_verifier` \| `research` \| `signals` \| `linkedin` \| `social` \| `crm` | no | Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm |
+| `slot` | `brain` \| `lead_source` \| `email_finder` \| `email_verifier` \| `compliance` \| `research` \| `signals` \| `linkedin` \| `social` \| `crm` | no | Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm |
 | `response_format` | `concise` \| `detailed` | no | Used by: catalog, list, test. concise = key fields only (default); detailed = every field |
 | `provider` | string | no | Used by: set, remove, test. Meaning depends on the action. |
 | `level` | `workspace` \| `instance` | no | Used by: set, remove. workspace (default when a workspace is given) or instance |

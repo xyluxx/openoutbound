@@ -57,6 +57,8 @@ export interface BlockerFacts {
   endsAt?: Date | null;
   /** Extra plain words (a stored reason or error). */
   detail?: string | null;
+  /** What an outside check says to do next (the cold email check's next step or hint). */
+  nextStep?: string | null;
   since?: Date | null;
 }
 
@@ -133,6 +135,11 @@ const detail = (f: BlockerFacts) => {
 };
 const next = (f: BlockerFacts, words = "Next try") =>
   f.until ? ` ${words} ${whenInWords(f.until, f.zone, f.now)}.` : "";
+/** An outside check's own next step, as the first sentence of a fix. */
+const nextStep = (f: BlockerFacts) => {
+  const text = f.nextStep?.trim().replace(/[.\s]+$/, "");
+  return text ? `${text}. ` : "";
+};
 const moved = (f: BlockerFacts) =>
   f.movedTo && f.until
     ? ` The email moves to ${f.movedTo} and goes out ${whenInWords(f.until, f.zone, f.now)}.`
@@ -419,6 +426,33 @@ export const BLOCKER_TEMPLATES: Record<string, Template> = {
       `${companyLabel(f)} may be a UK sole trader (no corporate legal form found), which counts as an individual.`,
     fix: (f) =>
       `If it is a limited company, record custom.legal_form with manage_leads action update_company${id("company_id", f.companyId)}.`,
+  },
+  // The cold email check (the compliance provider's verdict, leads/cold-email.ts).
+  cold_email_consent_needed: {
+    hard: true,
+    message: (f) =>
+      `The cold email check found that ${who(f)} may only get a cold email with prior consent${detail(f)}.`,
+    fix: (f) =>
+      `${nextStep(f)}Record custom.consent with ${leadsUpdate(f)} only if you really have consent; the verdict is asked again after 30 days or when the lead's facts change.`,
+  },
+  cold_email_blocked: {
+    hard: true,
+    message: (f) =>
+      `The cold email check found that ${who(f)} must not get a cold email${detail(f)}.`,
+    fix: (f) => f.nextStep?.trim() || null,
+  },
+  cold_email_unknown: {
+    hard: true,
+    message: (f) =>
+      `The cold email check could not tell whether ${who(f)} may get a cold email${detail(f)}.`,
+    fix: (f) =>
+      `${nextStep(f)}Add the missing facts: the person's country with ${leadsUpdate(f)}, or the company's name or registration number (custom.company_number) with manage_leads action update_company${id("company_id", f.companyId)}; the next email asks again.`,
+  },
+  cold_email_check_failed: {
+    hard: false,
+    message: (f) => `The email is held: the cold email check could not run${detail(f)}.${next(f)}`,
+    fix: (f) =>
+      `${nextStep(f)}The engine tries again by itself. ${askToChangeSettingAfter("To send without the check", { "compliance.cold_email_check.mode": "warn" })}`,
   },
   privacy_request_open: {
     hard: true,

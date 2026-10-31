@@ -22,6 +22,13 @@
       "when": 1790820759126,
       "tag": "0002_hardening",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793478555814,
+      "tag": "0003_cold_email_check",
+      "breakpoints": true
     }
   ]
 }

@@ -109,12 +109,16 @@ async function client(
     slug,
     timezone: "America/Chicago",
     ...(options.sandbox ? { is_sandbox: true } : {}),
-    settings: options.settings ?? {
-      company: {
-        name: "Brightline Answering",
-        website: "https://brightline-answering.example.org",
-        postal_address: POSTAL_ADDRESS,
-      },
+    settings: {
+      ...(options.settings ?? {
+        company: {
+          name: "Brightline Answering",
+          website: "https://brightline-answering.example.org",
+          postal_address: POSTAL_ADDRESS,
+        },
+      }),
+      // No network here: the cold email check (Precleared) would hold every first email.
+      compliance: { cold_email_check: { mode: "off" } },
     },
   })) as { id: string; slug: string };
   const call = <T = Any>(operationId: string, input: unknown = {}, options: TestCallOptions = {}) =>

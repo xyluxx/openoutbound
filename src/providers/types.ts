@@ -28,6 +28,7 @@ export const SLOTS = [
   "lead_source",
   "email_finder",
   "email_verifier",
+  "compliance",
   "research",
   "signals",
   "linkedin",
@@ -42,6 +43,7 @@ export interface SlotInterfaces {
   lead_source: LeadSourceProvider;
   email_finder: EmailFinderProvider;
   email_verifier: EmailVerifierProvider;
+  compliance: ComplianceProvider;
   research: ResearchProvider;
   signals: SignalProvider;
   linkedin: LinkedInProvider;
@@ -404,6 +406,84 @@ export interface VerifyEmailResult {
 export interface EmailVerifierProvider {
   id: string;
   verify(email: string): Promise<VerifyEmailResult>;
+}
+
+// --- compliance ------------------------------------------------------------------------------
+
+/** How the engine got hold of an address: what a compliance check decides relevance and consent on. */
+export const ADDRESS_SOURCES = ["published", "bought", "scraped", "given", "unknown"] as const;
+export type AddressSource = (typeof ADDRESS_SOURCES)[number];
+
+/**
+ * The verdict of a cold email check: `ok_to_email` (send, with a footer that meets
+ * `footer_text`), `consent_needed` (prior consent first), `blocked` (never), `unknown` (a fact
+ * could not be established: treated like consent_needed until it is).
+ */
+export const EMAIL_CHECK_VERDICTS = [
+  "ok_to_email",
+  "consent_needed",
+  "blocked",
+  "unknown",
+] as const;
+export type EmailCheckVerdict = (typeof EMAIL_CHECK_VERDICTS)[number];
+
+/** Countries a compliance provider can answer for as the sender's base. */
+export const SENDER_COUNTRIES = ["GB", "US", "AE"] as const;
+export type SenderCountry = (typeof SENDER_COUNTRIES)[number];
+
+/** One address and what the engine knows about the recipient and the sender. */
+export interface EmailCheckInput {
+  /** Lowercase. */
+  email: string;
+  /** Where the sending business is based. */
+  sender_country: SenderCountry;
+  address_source: AddressSource;
+  /** Help find the company in a register; not stored by the provider. */
+  company_name?: string | null;
+  recipient_name?: string | null;
+  /** Confirms a UK company (Companies House number). */
+  company_number?: string | null;
+  /** ISO 3166-1 alpha-2, only when the engine is sure (the lead's country field). */
+  recipient_country?: string | null;
+  /** Used only when the provider cannot work the country out (a ccTLD guess). Never with `recipient_country`. */
+  default_recipient_country?: string | null;
+  /** True only when the person has bought from the sender. */
+  existing_customer?: boolean;
+  /** One short line on what the email offers. */
+  pitch?: string | null;
+  /** Aborts the request when the job is cancelled or runs out of time. */
+  signal?: AbortSignal;
+}
+
+export interface EmailCheckResult {
+  verdict: EmailCheckVerdict;
+  /** 0-1, when the provider gives one. */
+  confidence?: number | null;
+  /** The rule that decided it, in words (or the provider's note when no rule applied). */
+  reason: string | null;
+  /** Where the rule comes from. */
+  source?: { title: string | null; url: string | null } | null;
+  /** What to do about a verdict that is not ok_to_email. */
+  next_step: string | null;
+  /** What the email's footer must include; a requirement, not wording to paste. */
+  footer_text?: string | null;
+  /** The provider's receipt id, to show the check to a client, auditor or regulator later. */
+  receipt_id: string | null;
+  /** The recipient's country as the provider worked it out. */
+  recipient_country?: string | null;
+  /** True when the provider's allowance or credits were used for this answer. */
+  creditsUsed: number;
+  raw?: unknown;
+}
+
+/**
+ * Answers one question per address: may a cold or marketing email go to this person? A
+ * definite verdict (anything but `unknown`) may be reused for 30 days for the same address and
+ * the same input; `unknown` is never cached.
+ */
+export interface ComplianceProvider {
+  id: string;
+  checkEmail(input: EmailCheckInput): Promise<EmailCheckResult>;
 }
 
 // --- research --------------------------------------------------------------------------------

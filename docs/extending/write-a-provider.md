@@ -12,6 +12,7 @@ Every outside service sits behind a slot, a typed interface such as `email_verif
 | `lead_source` | `LeadSourceProvider` | `capabilities`, and any of `searchPeople`, `searchCompanies`, `enrichPeople`, `estimate` |
 | `email_finder` | `EmailFinderProvider` | `findEmail(input)` |
 | `email_verifier` | `EmailVerifierProvider` | `verify(email)` |
+| `compliance` | `ComplianceProvider` | `checkEmail(input)` |
 | `research` | `ResearchProvider` | `search(query)`; optional `fetch(url)`, `answer(question)` and `creditsPerCall` |
 | `signals` | `SignalProvider` | `supportedSignals` and `collect(target)`; optional `parseWebhook` and `creditsPerCall` |
 | `linkedin` | `LinkedInProvider` | `getProfile`, `visitProfile`, `sendInvite`, `sendMessage`, `listRecentPosts`, `reactToPost`, `commentOnPost`; optional account, sync and webhook methods |

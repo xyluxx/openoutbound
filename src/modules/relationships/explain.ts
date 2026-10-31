@@ -146,11 +146,12 @@ export function errorBlockers(
 
   const contact = /^not_contactable:\s*(.*)$/.exec(error);
   if (contact) {
-    const codes = (contact[1] ?? "")
-      .split(/[,\s]+/)
-      .filter((code) => code.length > 0 && code !== "unknown");
+    // The codes, then the words a code stored after a colon (the cold email check's reason).
+    const [list = "", ...rest] = (contact[1] ?? "").split(": ");
+    const detail = rest.join(": ").trim() || null;
+    const codes = list.split(/[,\s]+/).filter((code) => code.length > 0 && code !== "unknown");
     if (codes.length === 0) return [fallback("the person could not be contacted when it was due")];
-    return codes.map((code) => blocker(code, closed, hard));
+    return codes.map((code) => blocker(code, { ...closed, detail }, hard));
   }
   if (message.status === "bounced") {
     const bounce = BOUNCES.find((item) => error.startsWith(item.prefix));

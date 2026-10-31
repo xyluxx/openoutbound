@@ -25,6 +25,11 @@ import { type EmailGate, evaluateEmailGate, type GateBlocker } from "../relation
 import { applyBounce } from "./bounce.js";
 import { rampLimit } from "./capacity.js";
 import {
+  COLD_EMAIL_CHECK_FAILED,
+  checkColdEmail,
+  openColdEmailHoldProblem,
+} from "./cold-email-check.js";
+import {
   buildReferences,
   newMessageIdHeader,
   type OutgoingEmail,
@@ -129,8 +134,9 @@ export const sendEmailJob = defineJob({
  * Sends one scheduled email (the `email.send` job). Re-checks the message status, then runs the
  * send gate (relationships/gate.ts: the kill switch, the person, the recipient, the campaign, a
  * thread a person took over, the mailbox and its throttle, contactability with suppressions and
- * privacy requests, a company hold, the send window and the daily cap), then renders, sends,
- * records and emits `message.sent`. Failures are classified (spec 11.8):
+ * privacy requests, a company hold, the send window, the daily cap and the cold email check
+ * before a first email), then renders, sends, records and emits `message.sent`. Failures are
+ * classified (spec 11.8):
  * login problems mark the mailbox `error` and move the message to another campaign mailbox
  * (or hold it until the mailbox sends again), temporary errors retry with backoff, provider
  * throttling parks the mailbox until tomorrow, unknown recipients become hard bounces and other
@@ -219,6 +225,8 @@ async function sendScheduled(
       hooks: {
         reverify: ({ person, recipient }) =>
           reverifyBeforeFirstEmail(ctx, { workspace, settings, message, person }, recipient, now),
+        coldEmailCheck: ({ person, company, recipient }) =>
+          checkColdEmail(ctx, { workspace, settings, message, person, company, recipient, now }),
       },
     },
   );
@@ -226,6 +234,14 @@ async function sendScheduled(
   if (first) {
     // Held without a working unsubscribe link: one problem says what to do.
     if (first.code === UNSUBSCRIBE_LINK_MISSING) await openUnsubscribeHoldProblem(ctx);
+    // Held because the cold email check could not run: one problem carries the provider's words.
+    if (first.code === COLD_EMAIL_CHECK_FAILED && first.retry_at) {
+      await openColdEmailHoldProblem(ctx, {
+        message: first.detail ?? first.message,
+        remedy: first.fix,
+        retryAt: new Date(first.retry_at),
+      });
+    }
     return applyGate(ctx, workspace, message, gate, first, now);
   }
   const { recipient, mailbox, replyMode } = gate;

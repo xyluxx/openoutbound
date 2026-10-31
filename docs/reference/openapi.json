@@ -24124,7 +24124,7 @@
             "name": "slot",
             "in": "query",
             "required": false,
-            "description": "Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm",
+            "description": "Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm",
             "schema": {
               "type": "string",
               "enum": [
@@ -24132,13 +24132,14 @@
                 "lead_source",
                 "email_finder",
                 "email_verifier",
+                "compliance",
                 "research",
                 "signals",
                 "linkedin",
                 "social",
                 "crm"
               ],
-              "description": "Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm"
+              "description": "Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm"
             }
           },
           {
@@ -24245,7 +24246,7 @@
             "name": "slot",
             "in": "query",
             "required": false,
-            "description": "Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm",
+            "description": "Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm",
             "schema": {
               "type": "string",
               "enum": [
@@ -24253,13 +24254,14 @@
                 "lead_source",
                 "email_finder",
                 "email_verifier",
+                "compliance",
                 "research",
                 "signals",
                 "linkedin",
                 "social",
                 "crm"
               ],
-              "description": "Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm"
+              "description": "Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm"
             }
           },
           {
@@ -24406,13 +24408,14 @@
                 "lead_source",
                 "email_finder",
                 "email_verifier",
+                "compliance",
                 "research",
                 "signals",
                 "linkedin",
                 "social",
                 "crm"
               ],
-              "description": "Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm"
+              "description": "Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm"
             }
           },
           {
@@ -24478,13 +24481,14 @@
                 "lead_source",
                 "email_finder",
                 "email_verifier",
+                "compliance",
                 "research",
                 "signals",
                 "linkedin",
                 "social",
                 "crm"
               ],
-              "description": "Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm"
+              "description": "Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm"
             }
           },
           {
@@ -24671,13 +24675,14 @@
                 "lead_source",
                 "email_finder",
                 "email_verifier",
+                "compliance",
                 "research",
                 "signals",
                 "linkedin",
                 "social",
                 "crm"
               ],
-              "description": "Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm"
+              "description": "Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm"
             }
           },
           {
@@ -54321,6 +54326,75 @@
                 ],
                 "description": "The last enrichment run: its status, finder answers and what failed"
               },
+              "email_clearance": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "provider": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string",
+                        "description": "The address the verdict is about"
+                      },
+                      "verdict": {
+                        "type": "string",
+                        "enum": [
+                          "ok_to_email",
+                          "consent_needed",
+                          "blocked",
+                          "unknown"
+                        ],
+                        "description": "ok_to_email: a cold email may go; consent_needed and blocked hold it (30 days); unknown held one email and is asked again"
+                      },
+                      "reason": {
+                        "description": "The rule that decided it, in words",
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "next_step": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "receipt_id": {
+                        "description": "The provider's receipt, to show the check later",
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "recipient_country": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "checked_at": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "provider",
+                      "email",
+                      "verdict",
+                      "reason",
+                      "next_step",
+                      "receipt_id",
+                      "checked_at"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "The cold email check's last verdict for the address, with the next step and receipt"
+              },
               "phone": {
                 "type": [
                   "string",
@@ -54444,6 +54518,7 @@
               "email_source",
               "email_checked_at",
               "enrichment",
+              "email_clearance",
               "phone",
               "region",
               "city",
@@ -74286,13 +74361,14 @@
               "lead_source",
               "email_finder",
               "email_verifier",
+              "compliance",
               "research",
               "signals",
               "linkedin",
               "social",
               "crm"
             ],
-            "description": "Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm"
+            "description": "Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm"
           },
           "workspace": {
             "description": "Workspace id or slug. Only needed with instance-level keys.",
@@ -74446,13 +74522,14 @@
               "lead_source",
               "email_finder",
               "email_verifier",
+              "compliance",
               "research",
               "signals",
               "linkedin",
               "social",
               "crm"
             ],
-            "description": "Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm"
+            "description": "Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm"
           },
           "workspace": {
             "description": "Workspace id or slug. Only needed with instance-level keys.",
@@ -74571,13 +74648,14 @@
               "lead_source",
               "email_finder",
               "email_verifier",
+              "compliance",
               "research",
               "signals",
               "linkedin",
               "social",
               "crm"
             ],
-            "description": "Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm"
+            "description": "Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm"
           },
           "provider": {
             "type": "string",
@@ -74645,13 +74723,14 @@
               "lead_source",
               "email_finder",
               "email_verifier",
+              "compliance",
               "research",
               "signals",
               "linkedin",
               "social",
               "crm"
             ],
-            "description": "Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm"
+            "description": "Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm"
           },
           "provider": {
             "type": "string",
@@ -74821,13 +74900,14 @@
               "lead_source",
               "email_finder",
               "email_verifier",
+              "compliance",
               "research",
               "signals",
               "linkedin",
               "social",
               "crm"
             ],
-            "description": "Provider slot: brain, lead_source, email_finder, email_verifier, research, signals, linkedin, social, crm"
+            "description": "Provider slot: brain, lead_source, email_finder, email_verifier, compliance, research, signals, linkedin, social, crm"
           },
           "provider": {
             "type": "string"

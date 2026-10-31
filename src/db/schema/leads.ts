@@ -29,6 +29,7 @@ import type {
   SuppressionType,
 } from "../../core/enums.js";
 import type { Failure } from "../../core/failures.js";
+import type { EmailCheckVerdict } from "../../providers/types.js";
 import { createdAt, idColumn, tstz, updatedAt } from "./columns.js";
 import { workspaceId } from "./core.js";
 
@@ -96,6 +97,31 @@ export interface PersonEnrichment {
   failed?: EnrichmentFailedStep[];
   /** When the engine tries the failed steps again by itself; null when it does not. */
   retry_at?: string | null;
+}
+
+/**
+ * people.email_clearance: the compliance provider's last answer for the person's address
+ * (owned by the leads module, written by the send job): whether a cold email may go there, the
+ * rule in words, the next step, the receipt id and a fingerprint of the facts it was decided
+ * on. A definite verdict (anything but `unknown`) stands for 30 days for the same address and
+ * facts; `unknown` is kept to show, never reused.
+ */
+export interface EmailClearance {
+  /** Provider id, e.g. "precleared". */
+  provider: string;
+  /** The address the verdict is about (lowercase). */
+  email: string;
+  verdict: EmailCheckVerdict;
+  /** The rule that decided it, in words. */
+  reason: string | null;
+  next_step: string | null;
+  receipt_id: string | null;
+  /** The recipient's country as the provider worked it out. */
+  recipient_country?: string | null;
+  /** ISO time of the check. */
+  checked_at: string;
+  /** Hash of the facts sent with the address; a different one means a fresh check. */
+  inputs: string;
 }
 
 export interface ImportRowError {
@@ -189,6 +215,8 @@ export const people = pgTable(
     email_not_found_at: tstz("email_not_found_at"),
     /** The last enrichment run: its outcome, the finders that answered and what failed. */
     enrichment: jsonb("enrichment").$type<PersonEnrichment>(),
+    /** The compliance provider's last cold email verdict for the address (send job). */
+    email_clearance: jsonb("email_clearance").$type<EmailClearance>(),
     /** Normalized https://www.linkedin.com/in/<slug> (normalizeLinkedinUrl). */
     linkedin_url: text("linkedin_url"),
     phone: text("phone"),

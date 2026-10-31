@@ -1,0 +1,27 @@
+{
+  "verdict": "consent_needed",
+  "confidence": 0.81,
+  "reasons": [
+    {
+      "rule_key": "uk_pecr_individual_subscriber",
+      "text": "The recipient appears to be a sole trader, an individual subscriber under PECR regulation 22: unsolicited marketing email needs their prior consent.",
+      "source_title": "PECR regulation 22",
+      "source_url": "https://www.legislation.gov.uk/uksi/2003/2426/regulation/22"
+    }
+  ],
+  "next_step": "Get the person's consent before emailing, or confirm the business is a company by adding its Companies House number.",
+  "footer_text": null,
+  "facts": {
+    "recipient_country": "GB",
+    "company_number": null
+  },
+  "receipt": {
+    "id": "rcpt_01k6a3v0q8x3m2n4p5r6s7t8cn",
+    "issued_at": "2026-09-19T12:00:00Z"
+  },
+  "usage": {
+    "allowance": "keyless",
+    "used_today": 2,
+    "limit_today": 10
+  }
+}

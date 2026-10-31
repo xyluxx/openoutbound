@@ -9,6 +9,7 @@ import {
   usage_records,
   workspaces,
 } from "../../db/schema/index.js";
+import { SLOTS } from "../../providers/types.js";
 import { createTestEngine, type TestEngine } from "../../testing/engine.js";
 import { module as system } from "../system/index.js";
 import { module as workspacesModule } from "./index.js";
@@ -415,7 +416,7 @@ describe("workspace management", () => {
       "postal_address",
     ]);
     expect(fresh.setup.next_step).toContain("settings.company.name");
-    expect(fresh.providers).toHaveLength(9);
+    expect(fresh.providers).toHaveLength(SLOTS.length);
     expect(fresh.warnings).toEqual([]);
     expect(fresh.usage.month).toBe("2026-09");
 

@@ -1,0 +1,11 @@
+{
+  "error": "daily_limit",
+  "operator_message": "Today's 10 free checks for this network are used. A free key gives you 100 checks a day for 14 days, then 25 a day.",
+  "create_key": {
+    "method": "POST",
+    "url": "https://precleared.dev/api/v1/keys",
+    "body": {
+      "email": ""
+    }
+  }
+}

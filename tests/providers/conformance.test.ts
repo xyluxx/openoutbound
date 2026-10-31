@@ -268,6 +268,25 @@ const ENTRIES: Record<string, Entry | Skip> = {
     ],
   },
 
+  // --- compliance ----------------------------------------------------------------------------
+  "compliance:precleared": {
+    probes: [
+      {
+        name: "checkEmail",
+        kind: "read",
+        // Every answered check uses one of the day's allowance.
+        paid: true,
+        call: (compliance, signal) =>
+          compliance.checkEmail({
+            email: "dana@example.com",
+            sender_country: "GB",
+            address_source: "unknown",
+            signal,
+          }),
+      },
+    ],
+  },
+
   // --- research ------------------------------------------------------------------------------
   "research:parallel": {
     probes: [

@@ -3,6 +3,7 @@ import { and, eq } from "drizzle-orm";
 import { SMTPServer } from "smtp-server";
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 import { JobWaitError } from "../../core/errors.js";
+import { providerFailure } from "../../core/failures.js";
 import {
   type Mailbox,
   mailboxes,
@@ -14,7 +15,11 @@ import {
   threads,
   workspaces,
 } from "../../db/schema/index.js";
-import type { EmailVerifierProvider } from "../../providers/types.js";
+import type {
+  ComplianceProvider,
+  EmailCheckResult,
+  EmailVerifierProvider,
+} from "../../providers/types.js";
 import { notify } from "../../runtime/notify.js";
 import { createTestContext, type TestContext } from "../../testing/context.js";
 import {
@@ -189,6 +194,8 @@ async function setup(
     baseUrl?: string;
     now?: string;
     verifier?: boolean;
+    /** A fake compliance provider for the cold email check. */
+    compliance?: ComplianceProvider;
     settings?: Record<string, unknown>;
   } = {},
 ) {
@@ -200,7 +207,10 @@ async function setup(
       company: { name: "Helix Outbound", postal_address: "12 Harbor Road, Austin" },
       ...options.settings,
     },
-    ...(options.verifier ? { providers: { email_verifier: fakeVerifier } } : {}),
+    providers: {
+      ...(options.verifier ? { email_verifier: fakeVerifier } : {}),
+      ...(options.compliance ? { compliance: options.compliance } : {}),
+    },
   });
   let mailbox: Mailbox;
   if (options.sandbox) {
@@ -869,6 +879,348 @@ describe("email.send re-verification before the first email", () => {
     const { message } = await scheduled(mailbox);
     expect(await sendEmailMessage(ctx.jobContext(), message.id)).toMatchObject({ status: "sent" });
     expect(verifyEmailNow).not.toHaveBeenCalled();
+  });
+});
+
+describe("email.send cold email check before the first email", () => {
+  const RECEIPT = "rcpt_01k6a3v0q8x3m2n4p5r6s7t8v1";
+
+  function verdict(
+    kind: EmailCheckResult["verdict"],
+    words: Partial<EmailCheckResult> = {},
+  ): EmailCheckResult {
+    return {
+      verdict: kind,
+      reason: null,
+      next_step: null,
+      receipt_id: RECEIPT,
+      recipient_country: "GB",
+      creditsUsed: 1,
+      ...words,
+    };
+  }
+
+  /** A fake compliance provider that answers (or fails) the same way every time. */
+  function compliance(answer: EmailCheckResult | (() => Promise<EmailCheckResult>)) {
+    const checkEmail = vi.fn<ComplianceProvider["checkEmail"]>(async () =>
+      typeof answer === "function" ? answer() : answer,
+    );
+    return { provider: { id: "precleared", checkEmail } satisfies ComplianceProvider, checkEmail };
+  }
+
+  async function person(id: string) {
+    const [row] = await ctx.db.select().from(people).where(eq(people.id, id));
+    if (!row) throw new Error("person missing");
+    return row;
+  }
+
+  async function heldProblems() {
+    return ctx.db.select().from(problems).where(eq(problems.kind, "sending_blocked"));
+  }
+
+  it("sends on ok_to_email and keeps the receipt with the person", async () => {
+    const { provider, checkEmail } = compliance(
+      verdict("ok_to_email", { reason: "The recipient is a corporate subscriber." }),
+    );
+    const mailbox = await setup({ sandbox: true, compliance: provider });
+    const company = await seedCompany(ctx, {
+      name: "Harbor Dental Ltd",
+      country: "GB",
+      custom: { company_number: "01234567" },
+    });
+    const { person: dana, message } = await scheduled(mailbox, "dana@harbor.example.com", {
+      company_id: company.id,
+    });
+    await ctx.db
+      .update(people)
+      .set({
+        company_id: company.id,
+        full_name: "Dana Reyes",
+        // No country of her own: the company's stands in (never the ccTLD guess then).
+        country: null,
+        email_source: "https://harbor.example.com/team",
+      })
+      .where(eq(people.id, dana.id));
+    expect(await sendEmailMessage(ctx.jobContext(), message.id)).toMatchObject({ status: "sent" });
+    expect(getSandboxOutbox()).toHaveLength(1);
+    expect(checkEmail).toHaveBeenCalledTimes(1);
+    expect(checkEmail.mock.calls[0]?.[0]).toMatchObject({
+      email: "dana@harbor.example.com",
+      sender_country: "GB",
+      address_source: "published",
+      company_name: "Harbor Dental Ltd",
+      recipient_name: "Dana Reyes",
+      company_number: "01234567",
+      recipient_country: "GB",
+      default_recipient_country: null,
+    });
+    expect((await person(dana.id)).email_clearance).toMatchObject({
+      provider: "precleared",
+      email: "dana@harbor.example.com",
+      verdict: "ok_to_email",
+      reason: "The recipient is a corporate subscriber.",
+      receipt_id: RECEIPT,
+      checked_at: ctx.clock.now().toISOString(),
+    });
+  });
+
+  it("skips the email on consent_needed and records the reason, next step and receipt", async () => {
+    const { provider } = compliance(
+      verdict("consent_needed", {
+        reason: "The recipient appears to be a sole trader.",
+        next_step: "Get consent first, or add the company number.",
+      }),
+    );
+    const mailbox = await setup({ sandbox: true, compliance: provider });
+    const { person: dana, message } = await scheduled(mailbox);
+    const outcome = await sendEmailMessage(ctx.jobContext(), message.id);
+    expect(outcome).toMatchObject({ status: "skipped" });
+    expect(outcome.reason).toContain("cold_email_consent_needed");
+    expect(outcome.reason).toContain("sole trader");
+    expect(outcome.reason).toContain("add the company number");
+    expect(outcome.reason).toContain(RECEIPT);
+    expect(getSandboxOutbox()).toHaveLength(0);
+    expect((await reload(message.id)).error).toContain(
+      "not_contactable: cold_email_consent_needed",
+    );
+    expect((await person(dana.id)).email_clearance).toMatchObject({
+      verdict: "consent_needed",
+      next_step: "Get consent first, or add the company number.",
+      receipt_id: RECEIPT,
+    });
+    expect(await heldProblems()).toEqual([]);
+  });
+
+  it("skips on blocked and unknown, and asks again after an unknown verdict", async () => {
+    const blocked = compliance(verdict("blocked", { reason: "Opted out register." }));
+    const mailbox = await setup({ sandbox: true, compliance: blocked.provider });
+    const first = await scheduled(mailbox, "lee@harbor.example.com");
+    expect(await sendEmailMessage(ctx.jobContext(), first.message.id)).toMatchObject({
+      status: "skipped",
+      reason: expect.stringContaining("cold_email_blocked: Opted out register."),
+    });
+
+    const unknown = compliance(verdict("unknown", { reason: "No register match." }));
+    ctx.providers.set("compliance", unknown.provider);
+    const second = await scheduled(mailbox, "kim@harbor.example.com");
+    expect(await sendEmailMessage(ctx.jobContext(), second.message.id)).toMatchObject({
+      status: "skipped",
+      reason: expect.stringContaining("cold_email_unknown"),
+    });
+    // The next email to the same person asks again: unknown is never reused.
+    const again = await seedMessage(ctx, {
+      person_id: second.person.id,
+      mailbox_id: mailbox.id,
+      to_address: "kim@harbor.example.com",
+      status: "scheduled",
+      scheduled_for: ctx.clock.now(),
+      subject: "Second try",
+      body_text: "Hi again.",
+    });
+    expect(await sendEmailMessage(ctx.jobContext(), again.id)).toMatchObject({ status: "skipped" });
+    expect(unknown.checkEmail).toHaveBeenCalledTimes(2);
+    expect(getSandboxOutbox()).toHaveLength(0);
+  });
+
+  it("holds the email and opens one problem when the check cannot run (mode hold)", async () => {
+    const { provider, checkEmail } = compliance(async () => {
+      throw providerFailure({
+        provider: "precleared",
+        name: "Precleared",
+        class: "quota_exhausted",
+        message: "Precleared: the free daily allowance of checks is used up.",
+        hint: "Get a free key at https://precleared.dev/get-key.",
+        retryAfterSeconds: 3600,
+      });
+    });
+    const mailbox = await setup({ sandbox: true, compliance: provider });
+    const { person: dana, message } = await scheduled(mailbox);
+    const error = await sendEmailMessage(ctx.jobContext(), message.id).catch((e: unknown) => e);
+    expect(error).toBeInstanceOf(JobWaitError);
+    expect((error as JobWaitError).retryAt?.toISOString()).toBe(
+      new Date(ctx.clock.now().getTime() + 3600_000).toISOString(),
+    );
+    expect(getSandboxOutbox()).toHaveLength(0);
+    expect((await reload(message.id)).status).toBe("scheduled");
+    expect((await person(dana.id)).email_clearance).toBeNull();
+    const open = await heldProblems();
+    expect(open).toHaveLength(1);
+    expect(open[0]).toMatchObject({
+      severity: "high",
+      owner: "person",
+      status: "open",
+      dedupe_key: "sending_blocked:cold_email_check",
+    });
+    expect(open[0]?.reason).toContain("free daily allowance of checks is used up");
+    expect(open[0]?.remedy).toContain("https://precleared.dev/get-key");
+    expect(open[0]?.remedy).toContain("compliance.cold_email_check.mode");
+
+    // A network error without a wait holds for 30 minutes; the problem is refreshed, not doubled.
+    checkEmail.mockImplementationOnce(async () => {
+      throw providerFailure({ provider: "precleared", name: "Precleared", class: "network" });
+    });
+    const later = await sendEmailMessage(ctx.jobContext(), message.id).catch((e: unknown) => e);
+    expect((later as JobWaitError).retryAt?.toISOString()).toBe(
+      new Date(ctx.clock.now().getTime() + 30 * 60_000).toISOString(),
+    );
+    expect(await heldProblems()).toHaveLength(1);
+
+    // Once a check answers, the held email goes out and the problem is resolved.
+    checkEmail.mockImplementationOnce(async () => verdict("ok_to_email"));
+    expect(await sendEmailMessage(ctx.jobContext(), message.id)).toMatchObject({ status: "sent" });
+    expect((await heldProblems())[0]?.status).toBe("resolved");
+  });
+
+  it("shows the hold with the provider's words in the gate view", async () => {
+    const { provider } = compliance(async () => {
+      throw providerFailure({ provider: "precleared", name: "Precleared", class: "network" });
+    });
+    const mailbox = await setup({ sandbox: true, compliance: provider });
+    const { person: dana, message } = await scheduled(mailbox);
+    const gate = await evaluateEmailGate(
+      ctx,
+      { personId: dana.id, messageId: message.id },
+      {
+        mode: "send",
+        hooks: {
+          coldEmailCheck: async () => ({
+            kind: "unavailable",
+            message: "Precleared could not be reached.",
+            hint: "Check the network.",
+            retry_at: new Date(ctx.clock.now().getTime() + 30 * 60_000),
+          }),
+        },
+      },
+    );
+    expect(gate.blockers).toHaveLength(1);
+    expect(gate.blockers[0]).toMatchObject({
+      code: "cold_email_check_failed",
+      disposition: "wait",
+      hard: false,
+      message: expect.stringContaining("Precleared could not be reached"),
+      fix: expect.stringContaining("Check the network."),
+    });
+  });
+
+  it("sends anyway in mode warn, both on a held verdict and when the check fails", async () => {
+    const { provider, checkEmail } = compliance(
+      verdict("consent_needed", { reason: "Sole trader." }),
+    );
+    const mailbox = await setup({
+      sandbox: true,
+      compliance: provider,
+      settings: { compliance: { cold_email_check: { mode: "warn" } } },
+    });
+    const held = await scheduled(mailbox, "dana@harbor.example.com");
+    expect(await sendEmailMessage(ctx.jobContext(), held.message.id)).toMatchObject({
+      status: "sent",
+    });
+    // The verdict is still recorded, so it can be read later.
+    expect((await person(held.person.id)).email_clearance).toMatchObject({
+      verdict: "consent_needed",
+      receipt_id: RECEIPT,
+    });
+    checkEmail.mockImplementationOnce(async () => {
+      throw providerFailure({ provider: "precleared", name: "Precleared", class: "network" });
+    });
+    const failed = await scheduled(mailbox, "lee@harbor.example.com");
+    expect(await sendEmailMessage(ctx.jobContext(), failed.message.id)).toMatchObject({
+      status: "sent",
+    });
+    expect(getSandboxOutbox()).toHaveLength(2);
+    expect(await heldProblems()).toEqual([]);
+  });
+
+  it("never asks in mode off, for replies or for follow-ups", async () => {
+    const { provider, checkEmail } = compliance(verdict("blocked"));
+    const mailbox = await setup({
+      sandbox: true,
+      compliance: provider,
+      settings: { compliance: { cold_email_check: { mode: "off" } } },
+    });
+    const off = await scheduled(mailbox, "dana@harbor.example.com");
+    expect(await sendEmailMessage(ctx.jobContext(), off.message.id)).toMatchObject({
+      status: "sent",
+    });
+    expect(checkEmail).not.toHaveBeenCalled();
+
+    await ctx.db
+      .update(workspaces)
+      .set({
+        settings: {
+          company: { name: "Helix Outbound", postal_address: "12 Harbor Road, Austin" },
+        },
+      })
+      .where(eq(workspaces.id, ctx.workspace.id));
+    const reply = await scheduled(mailbox, "lee@harbor.example.com", { action: "reply" });
+    expect(await sendEmailMessage(ctx.jobContext(), reply.message.id)).toMatchObject({
+      status: "sent",
+    });
+    // An email went out to Kim 3 days ago: the next one is a follow-up.
+    const followUp = await scheduled(mailbox, "kim@harbor.example.com");
+    await seedMessage(ctx, {
+      person_id: followUp.person.id,
+      mailbox_id: mailbox.id,
+      to_address: "kim@harbor.example.com",
+      status: "sent",
+      sent_at: new Date(ctx.clock.now().getTime() - 3 * 86_400_000),
+    });
+    expect(await sendEmailMessage(ctx.jobContext(), followUp.message.id)).toMatchObject({
+      status: "sent",
+    });
+    expect(checkEmail).not.toHaveBeenCalled();
+    // A first email to someone else is checked (and blocked) as usual.
+    const fresh = await scheduled(mailbox, "pat@harbor.example.com");
+    expect(await sendEmailMessage(ctx.jobContext(), fresh.message.id)).toMatchObject({
+      status: "skipped",
+    });
+    expect(checkEmail).toHaveBeenCalledTimes(1);
+  });
+
+  it("reuses a definite verdict for 30 days and asks again when the facts change", async () => {
+    const { provider, checkEmail } = compliance(
+      verdict("consent_needed", { reason: "Sole trader.", next_step: "Get consent." }),
+    );
+    const mailbox = await setup({ sandbox: true, compliance: provider });
+    const first = await scheduled(mailbox, "dana@harbor.example.com");
+    expect(await sendEmailMessage(ctx.jobContext(), first.message.id)).toMatchObject({
+      status: "skipped",
+    });
+    expect(checkEmail).toHaveBeenCalledTimes(1);
+
+    const nextStep = async (subject: string) =>
+      seedMessage(ctx, {
+        person_id: first.person.id,
+        mailbox_id: mailbox.id,
+        to_address: "dana@harbor.example.com",
+        status: "scheduled",
+        scheduled_for: ctx.clock.now(),
+        subject,
+        body_text: "Hi again.",
+      });
+    // The next step of the sequence: nothing went out, the stored verdict answers, no call.
+    ctx.clock.advanceBy({ days: 3 });
+    expect(await sendEmailMessage(ctx.jobContext(), (await nextStep("Step 2")).id)).toMatchObject({
+      status: "skipped",
+      reason: expect.stringContaining("Sole trader. Get consent."),
+    });
+    expect(checkEmail).toHaveBeenCalledTimes(1);
+
+    // A fact changed (the person's country is now known): a fresh check.
+    await ctx.db.update(people).set({ country: "GB" }).where(eq(people.id, first.person.id));
+    expect(await sendEmailMessage(ctx.jobContext(), (await nextStep("Step 3")).id)).toMatchObject({
+      status: "skipped",
+    });
+    expect(checkEmail).toHaveBeenCalledTimes(2);
+    expect(checkEmail.mock.calls[1]?.[0]).toMatchObject({ recipient_country: "GB" });
+
+    // Thirty days later the verdict is stale: asked again.
+    ctx.clock.advanceBy({ days: 31 });
+    expect(await sendEmailMessage(ctx.jobContext(), (await nextStep("Step 4")).id)).toMatchObject({
+      status: "skipped",
+    });
+    expect(checkEmail).toHaveBeenCalledTimes(3);
+    expect(getSandboxOutbox()).toHaveLength(0);
   });
 });
 

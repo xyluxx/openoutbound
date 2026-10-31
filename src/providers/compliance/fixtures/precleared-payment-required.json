@@ -1,0 +1,5 @@
+{
+  "error": "payment_required",
+  "operator_message": "This key has used today's free checks and has no pack left. Add a pack to carry on today, or wait for tomorrow's allowance.",
+  "buy_url": "https://precleared.dev/buy?plan=pack"
+}

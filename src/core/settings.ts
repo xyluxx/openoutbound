@@ -151,6 +151,29 @@ export const workspaceSettingsSchema = z.object({
         .describe(
           "UK (PECR): treat businesses without evidence of a corporate legal form as individuals and skip cold email unless consent is recorded",
         ),
+      cold_email_check: z
+        .object({
+          mode: z
+            .enum(["hold", "warn", "off"])
+            .default("hold")
+            .describe(
+              "hold = send only when the verdict is ok_to_email and hold everything else, including when the check cannot run; warn = log the verdict and send anyway; off = never ask",
+            ),
+          provider: z
+            .string()
+            .default("precleared")
+            .describe("compliance provider id (its key: PRECLEARED_API_KEY or providers set)"),
+          sender_country: z
+            .enum(["GB", "US", "AE"])
+            .default("GB")
+            .describe(
+              "Where the sending business is based, which decides the rules the sender is bound by",
+            ),
+        })
+        .prefault({})
+        .describe(
+          "Live check of each new recipient's address against the cold email rules of their country (UK PECR, US CAN-SPAM, CASL, UWG, ...) through the compliance provider, right before the first email; replies and follow-ups are never checked. The country rules above still apply first",
+        ),
       ad_disclosure: z
         .object({
           countries: z.array(countryCode).default(["US"]),

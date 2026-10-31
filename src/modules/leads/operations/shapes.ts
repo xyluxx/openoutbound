@@ -13,6 +13,7 @@ import { failureSchema } from "../../../core/failures.js";
 import { isoDateTime } from "../../../core/operation.js";
 import { decodeCursor, toPage } from "../../../core/pagination.js";
 import type { Company, Person } from "../../../db/schema/index.js";
+import { EMAIL_CHECK_VERDICTS } from "../../../providers/types.js";
 
 /** Example ids for operation examples (valid shapes, never real records). */
 export const EXAMPLE = {
@@ -83,6 +84,22 @@ export const personEnrichmentOutput = z.object({
     .describe("When the engine retries the failed steps by itself, or null when it does not"),
 });
 
+/** people.email_clearance: the compliance provider's last cold email verdict for the address. */
+export const personClearanceOutput = z.object({
+  provider: z.string(),
+  email: z.string().describe("The address the verdict is about"),
+  verdict: z
+    .enum(EMAIL_CHECK_VERDICTS)
+    .describe(
+      "ok_to_email: a cold email may go; consent_needed and blocked hold it (30 days); unknown held one email and is asked again",
+    ),
+  reason: z.string().nullable().describe("The rule that decided it, in words"),
+  next_step: z.string().nullable(),
+  receipt_id: z.string().nullable().describe("The provider's receipt, to show the check later"),
+  recipient_country: z.string().nullable().optional(),
+  checked_at: z.string(),
+});
+
 export const personDetail = personSummary.extend({
   first_name: z.string().nullable(),
   last_name: z.string().nullable(),
@@ -93,6 +110,11 @@ export const personDetail = personSummary.extend({
   enrichment: personEnrichmentOutput
     .nullable()
     .describe("The last enrichment run: its status, finder answers and what failed"),
+  email_clearance: personClearanceOutput
+    .nullable()
+    .describe(
+      "The cold email check's last verdict for the address, with the next step and receipt",
+    ),
   phone: z.string().nullable(),
   region: z.string().nullable(),
   city: z.string().nullable(),

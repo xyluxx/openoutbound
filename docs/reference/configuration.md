@@ -60,6 +60,7 @@ Each provider falls back to these when no secret is stored for it. See [Provider
 | `PROSPEO_API_KEY` | email_finder | `prospeo` |
 | `MILLIONVERIFIER_API_KEY` | email_verifier | `millionverifier` |
 | `REOON_API_KEY` | email_verifier | `reoon` |
+| `PRECLEARED_API_KEY` | compliance | `precleared` (optional: without a key the check uses the free daily allowance; see [Cold email check](../guides/cold-email-check.md)) |
 | `PARALLEL_API_KEY` | research | `parallel` |
 | `EXA_API_KEY` | research | `exa` |
 | `TAVILY_API_KEY` | research | `tavily` |
@@ -93,6 +94,10 @@ Country codes are ISO 3166-1 alpha-2 (`DE`, `US`). Weekdays are ISO numbers: 1 i
 | `compliance.consent_required_countries` | list of country code | `["DE","AT","IT","ES","NL","DK","PL","BE"]` | Countries that require prior consent even for B2B email: cold email is skipped unless person.custom.consent is true |
 | `compliance.publication_evidence_countries` | list of country code | `["CA","AU"]` | Cold email only with evidence of where the address was published (person.email_source URL or person.custom.publication_url) or recorded consent |
 | `compliance.uk_sole_trader_check` | boolean | `true` | UK (PECR): treat businesses without evidence of a corporate legal form as individuals and skip cold email unless consent is recorded |
+| `compliance.cold_email_check` | object | see below | Live check of each new recipient's address against the cold email rules of their country (UK PECR, US CAN-SPAM, CASL, UWG, ...) through the compliance provider, right before the first email; replies and follow-ups are never checked. The country rules above still apply first |
+| `compliance.cold_email_check.mode` | `hold` \| `warn` \| `off` | `"hold"` | hold = send only when the verdict is ok_to_email and hold everything else, including when the check cannot run; warn = log the verdict and send anyway; off = never ask |
+| `compliance.cold_email_check.provider` | string | `"precleared"` | compliance provider id (its key: PRECLEARED_API_KEY or providers set) |
+| `compliance.cold_email_check.sender_country` | `GB` \| `US` \| `AE` | `"GB"` | Where the sending business is based, which decides the rules the sender is bound by |
 | `compliance.ad_disclosure` | object | see below | Footer line identifying the email as an advertisement (CAN-SPAM) for recipients in these countries |
 | `compliance.ad_disclosure.countries` | list of country code | `["US"]` | Recipient countries that get the advertisement line |
 | `compliance.ad_disclosure.text` | string | `"This is a commercial message."` | The advertisement line |

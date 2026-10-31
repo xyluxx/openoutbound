@@ -7,7 +7,9 @@
  * person_unsubscribed, person_bounced, person_customer, company_do_not_contact,
  * company_competitor, company_customer, company_on_hold, company_open_deal, company_owned,
  * no_email, no_linkedin, role_address, invalid_email, unverified_email, catch_all_skipped,
- * excluded_country, consent_required, publication_evidence_missing, uk_possible_sole_trader.
+ * excluded_country, consent_required, publication_evidence_missing, uk_possible_sole_trader,
+ * cold_email_consent_needed, cold_email_blocked (the compliance provider's stored verdict,
+ * cold-email.ts).
  *
  * company_on_hold, company_open_deal and company_owned stop new outreach only: they never
  * block answering someone who wrote to us (`OUTREACH_ONLY_REASONS`).
@@ -18,6 +20,7 @@
 import { type OpContext, requireWorkspace } from "../../core/context.js";
 import { parseWorkspaceSettings, type WorkspaceSettings } from "../../core/settings.js";
 import type { Company, Person } from "../../db/schema/index.js";
+import { clearanceReasons } from "./cold-email.js";
 import { parseEmployees } from "./normalize.js";
 import { loadCompanies, loadPeople } from "./records.js";
 import { isBlockedRoleAddress } from "./role-address.js";
@@ -104,6 +107,8 @@ export function contactabilityReasons(
     reasons.push("excluded_country");
   }
   if (channel !== "email") return reasons;
+  // The compliance provider's stored verdict for the address (the send job records it).
+  reasons.push(...clearanceReasons(person, settings, now));
   // Without a recorded country, the email's ccTLD decides the compliance rules below.
   const tldCountry = country ? null : countryFromEmail(person.email);
   const complianceCountry = country ?? tldCountry;
