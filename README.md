@@ -90,7 +90,7 @@ The engine does the repetitive work on a schedule: sequencing, sending, reply sy
 | **Strategy and changes** | A strategy page agents read first. Changes to settings, offers, ICPs and campaigns are logged, with undo; agents propose changes, you approve them, and the engine reports whether they helped. |
 | **Reports** | Funnels by step and variant with A/B leaders, sender health, which signals lead to meetings, pipeline with meetings held, AI and data costs, scheduled summaries to Slack or email. |
 | **CRM** | HubSpot, Pipedrive or your own endpoint, or your agent syncs any CRM. You choose when people go there and what is written. Customers, open deals and do-not-contact flags flow back and stop outreach at once. |
-| **Compliance built in** | Consent-required countries, unsubscribe and postal address in every email, suppression everywhere, ad and AI disclosure lines, data retention. |
+| **Compliance built in** | Consent-required countries, a live cold email check before the first email (Precleared), unsubscribe and postal address in every email, suppression everywhere, ad and AI disclosure lines, data retention. |
 | **Agency ready** | Many client workspaces kept apart, scoped API keys, budgets per workspace, a kill switch, an audit log, a cross-client report, and a working setup copied to the next client. |
 
 ## Plug-ins
@@ -100,6 +100,7 @@ The engine does the repetitive work on a schedule: sequencing, sending, reply sy
 | AI brain | Anthropic, OpenAI, OpenRouter, Gemini, Ollama, LM Studio, any OpenAI-compatible API, Claude Code CLI, Codex CLI, or your connected agent |
 | Lead data | CSV, Excel, JSON, Apollo, Google Maps |
 | Email finder and checker | Icypeas, Findymail, Hunter, Prospeo, MillionVerifier, Reoon, built-in website crawler |
+| Cold email check | Precleared (on by default, works without a key) |
 | Research | Parallel, Exa, Tavily, Firecrawl, built-in fetcher |
 | Signals | Built-in collectors, PredictLeads, Crustdata, any tool via webhook |
 | LinkedIn | Unipile for outreach, LinkedIn official API for posting |
@@ -107,11 +108,17 @@ The engine does the repetitive work on a schedule: sequencing, sending, reply sy
 
 Need something else? [Write a provider](docs/extending/write-a-provider.md) in one file.
 
+## Cold email check
+
+Right before the first email to a person, the engine asks [Precleared](https://precleared.dev) whether a cold email may go to that address: it looks the recipient up live (Companies House, the domain, the company's website) and applies UK PECR and GDPR, US CAN-SPAM, CASL, UWG, CPCE, Australia's Spam Act and more. Only `ok_to_email` goes out; `consent_needed`, `blocked` and `unknown` skip the email with the reason, the next step and a receipt id kept on the lead (`get_lead`, `explain_blocker`, the skipped message). A check that cannot run holds the email and opens one problem that says why. Replies and follow-ups are never checked, and a verdict is reused for 30 days.
+
+Three settings: `compliance.cold_email_check.mode` (`hold`, the default; `warn` logs and sends; `off`), `compliance.cold_email_check.sender_country` (`GB`, `US` or `AE`) and an optional `PRECLEARED_API_KEY` (or `providers set --slot compliance --provider precleared`). Without a key Precleared allows 10 checks a day per network; a free key from [precleared.dev/get-key](https://precleared.dev/get-key) gives 100 a day. Decision support, not legal advice. Details: [Cold email check](docs/guides/cold-email-check.md).
+
 ## Documentation
 
 - **Start:** [The first hour](docs/getting-started/first-hour.md) · [Going live](docs/getting-started/going-live.md) · [Install](docs/getting-started/install.md) · [Connect your agent](docs/getting-started/connect-your-agent.md) · [Sandbox](docs/getting-started/sandbox.md)
 - **Understand:** [How it works](docs/concepts/how-it-works.md) · [Safety and approvals](docs/concepts/safety-and-approvals.md) · [Delivery guarantees](docs/concepts/delivery-guarantees.md) · [Provider failures](docs/concepts/provider-failures.md) · [Campaigns](docs/concepts/campaigns.md) · [Signals](docs/concepts/signals.md) · [Inbox](docs/concepts/inbox.md) · [Lead file](docs/concepts/lead-file.md) · [Relationships](docs/concepts/relationships.md) · [Strategy](docs/concepts/strategy.md) · [Reports](docs/concepts/reports.md)
-- **Set up:** [AI brain](docs/guides/ai-brain.md) · [Mailboxes](docs/guides/mailboxes.md) · [LinkedIn](docs/guides/linkedin.md) · [Meetings](docs/guides/meetings.md) · [CRM and notifications](docs/guides/crm-and-notifications.md) · [Lead sources](docs/guides/lead-sources.md) · [Deploy](docs/guides/deploy.md)
+- **Set up:** [AI brain](docs/guides/ai-brain.md) · [Mailboxes](docs/guides/mailboxes.md) · [LinkedIn](docs/guides/linkedin.md) · [Meetings](docs/guides/meetings.md) · [CRM and notifications](docs/guides/crm-and-notifications.md) · [Lead sources](docs/guides/lead-sources.md) · [Cold email check](docs/guides/cold-email-check.md) · [Deploy](docs/guides/deploy.md)
 - **Reference:** [MCP tools](docs/reference/mcp-tools.md) · [CLI](docs/reference/cli.md) · [REST API](docs/reference/rest-api.md) · [Configuration](docs/reference/configuration.md)
 - **Playbooks:** [ICP](skills/openoutbound/references/playbook-icp.md) · [Signals](skills/openoutbound/references/playbook-signals.md) · [Copywriting](skills/openoutbound/references/playbook-copywriting.md) · [Sequences](skills/openoutbound/references/playbook-sequences.md) · [Deliverability](skills/openoutbound/references/playbook-deliverability.md) · [LinkedIn](skills/openoutbound/references/playbook-linkedin.md) · [Replies](skills/openoutbound/references/playbook-replies.md) · [Meetings](skills/openoutbound/references/playbook-meetings.md) · [Lead file](skills/openoutbound/references/playbook-lead-file.md) · [CRM](skills/openoutbound/references/playbook-crm.md) · [Compliance](skills/openoutbound/references/playbook-compliance.md)
 

@@ -1,4 +1,5 @@
 import { providers as brain } from "./brain/index.js";
+import { providers as compliance } from "./compliance/index.js";
 import { providers as crm } from "./crm/index.js";
 import { providers as emailFinder } from "./email-finder/index.js";
 import { providers as emailVerifier } from "./email-verifier/index.js";
@@ -15,6 +16,7 @@ export const builtinProviders: ProviderDefinition[] = [
   ...leadSource,
   ...emailFinder,
   ...emailVerifier,
+  ...compliance,
   ...research,
   ...signals,
   ...linkedin,

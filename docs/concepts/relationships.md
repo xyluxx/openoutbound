@@ -83,6 +83,8 @@ Common blockers:
 | `daily_cap_reached`, `mailbox_warming`, `no_capacity` | Yes, when there is room again | None; to send more a day, add a mailbox with `manage_mailboxes` action `add` |
 | `outside_window` | Yes, when the window opens | None; if the window is wrong, `create_campaign` action `update` |
 | `unsubscribe_link_missing` | No | Set `OPENOUTBOUND_BASE_URL` to the engine's public https address and restart `openoutbound serve` |
+| `cold_email_consent_needed`, `cold_email_blocked`, `cold_email_unknown` | No | Follow the check's next step; record `custom.consent` with `manage_leads` action `update` only with real consent, or add the missing facts ([Cold email check](../guides/cold-email-check.md)) |
+| `cold_email_check_failed` | Yes, at the next try | Fix what the `sending_blocked` problem says (a key, the allowance, the network), or ask the human to set `compliance.cold_email_check.mode` to `warn` |
 | `linkedin_account_restricted` | No | Check the account on LinkedIn, then `manage_linkedin` action `resume` |
 | `linkedin_outside_hours`, `linkedin_cap_reached` | Yes, at the next free slot | None |
 | `not_connected` | Yes if an invitation is pending, else no | Send a connection invitation first |

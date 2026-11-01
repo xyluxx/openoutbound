@@ -43,6 +43,7 @@ New here? Start with [The first hour](getting-started/first-hour.md): the sandbo
 | [Meetings](guides/meetings.md) | Booking settings, connecting Calendly, Cal.com or any booking tool, tagged links, recording meetings by hand, no-shows, cancellations and qualified meetings |
 | [Lead sources](guides/lead-sources.md) | Importing files, Apollo, Google Maps, saved searches, ICP scores, lists, suppressions and exports |
 | [Enrichment](guides/enrichment.md) | Finding and verifying email addresses: the waterfall, finders, verifiers, catch-all domains and the website crawler |
+| [Cold email check](guides/cold-email-check.md) | The live check before the first email to a person (Precleared): what it asks, the verdicts, the three settings, where a held person shows up and how to get a free key |
 | [Research and signals](guides/research-and-signals.md) | Research briefs and signal providers, what they cost, what works for free, and pushing your own signals |
 | [Custom signals](guides/custom-signals.md) | Writing your own buying signal in plain English, with examples |
 | [CRM and notifications](guides/crm-and-notifications.md) | HubSpot, Pipedrive, your own endpoint or an agent syncing any CRM, CRM facts back, Slack and email notifications, and signed webhooks |

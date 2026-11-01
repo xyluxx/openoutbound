@@ -422,6 +422,16 @@ export function contactBlocker(
   if (code === PRIVACY_REQUEST_OPEN) {
     return blocker(code, { ...facts, problemId: extra.problemId ?? null });
   }
+  const clearance = state.person?.email_clearance;
+  if (code.startsWith("cold_email_") && clearance) {
+    // The stored verdict's own words: the rule, the next step and the receipt.
+    const receipt = clearance.receipt_id ? ` (receipt ${clearance.receipt_id})` : "";
+    return blocker(code, {
+      ...facts,
+      detail: `${clearance.reason ?? ""}${receipt}`.trim() || null,
+      nextStep: clearance.next_step,
+    });
+  }
   return blocker(code, facts);
 }
 

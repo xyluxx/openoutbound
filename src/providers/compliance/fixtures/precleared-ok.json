@@ -1,0 +1,28 @@
+{
+  "verdict": "ok_to_email",
+  "confidence": 0.92,
+  "reasons": [
+    {
+      "rule_key": "uk_pecr_corporate_subscriber",
+      "text": "The recipient is a corporate subscriber (a UK limited company), which PECR regulation 22 does not protect from unsolicited marketing email.",
+      "source_title": "PECR regulation 22",
+      "source_url": "https://www.legislation.gov.uk/uksi/2003/2426/regulation/22"
+    }
+  ],
+  "next_step": null,
+  "footer_text": "Identify the sender, give a valid postal address and a working way to opt out.",
+  "facts": {
+    "recipient_country": "GB",
+    "company_number": "01234567",
+    "company_status": "active"
+  },
+  "receipt": {
+    "id": "rcpt_01k6a3v0q8x3m2n4p5r6s7t8ok",
+    "issued_at": "2026-09-19T12:00:00Z"
+  },
+  "usage": {
+    "allowance": "keyless",
+    "used_today": 1,
+    "limit_today": 10
+  }
+}

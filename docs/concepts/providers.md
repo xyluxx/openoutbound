@@ -12,6 +12,7 @@ Every outside service sits behind a typed interface called a slot. Each slot can
 | `lead_source` | Finding people and companies | `apollo`, `google_maps` | [Lead sources](../guides/lead-sources.md) |
 | `email_finder` | Finding email addresses | `icypeas`, `findymail`, `hunter`, `prospeo` | [Enrichment](../guides/enrichment.md) |
 | `email_verifier` | Verifying email addresses | `millionverifier`, `reoon` | [Enrichment](../guides/enrichment.md) |
+| `compliance` | Whether a cold email may go to an address (the check before the first email) | `precleared` (keyless by default) | [Cold email check](../guides/cold-email-check.md) |
 | `research` | Web search and page reading for briefs | `parallel`, `exa`, `tavily`, `firecrawl`, `builtin` | [Research and signals](../guides/research-and-signals.md) |
 | `signals` | Paid signal data and inbound signal webhooks | `predictleads`, `crustdata`, `webhook` | [Research and signals](../guides/research-and-signals.md) |
 | `linkedin` | LinkedIn actions (visit, like, comment, invite, message) | `unipile` | [LinkedIn](../guides/linkedin.md) |

@@ -15,7 +15,7 @@ import { expect } from "vitest";
 import { createBrainService } from "../../../src/brain/service.js";
 import type { BrainService, OpContext } from "../../../src/core/context.js";
 import type { EventType } from "../../../src/core/events.js";
-import type { WorkspaceSettingsInput } from "../../../src/core/settings.js";
+import { mergeSettings, type WorkspaceSettingsInput } from "../../../src/core/settings.js";
 import {
   type Company,
   companies,
@@ -249,14 +249,18 @@ export async function startWorld(options: WorldOptions = {}): Promise<World> {
   const created = (await theEngine.call("workspaces.create", {
     name,
     timezone: options.timezone ?? "America/Chicago",
-    settings: {
-      company: {
-        name,
-        website: "https://brightline-answering.example.org",
-        postal_address: "1 Example Way, Austin, TX 78701",
+    settings: mergeSettings(
+      {
+        company: {
+          name,
+          website: "https://brightline-answering.example.org",
+          postal_address: "1 Example Way, Austin, TX 78701",
+        },
+        // Worlds have no network: the cold email check (Precleared) would hold every first email.
+        compliance: { cold_email_check: { mode: "off" } },
       },
-      ...options.settings,
-    },
+      options.settings ?? {},
+    ),
   })) as { id: string; slug: string };
   const target: SeedTarget = { db: theEngine.db, workspace: { id: created.id } };
   const mailbox = await seedMailbox(target, {

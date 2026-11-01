@@ -66,6 +66,7 @@ export const HEALTH_METHODS: {
   lead_source: ["searchPeople", "searchCompanies", "enrichPeople"],
   email_finder: ["findEmail"],
   email_verifier: ["verify"],
+  compliance: ["checkEmail"],
   research: ["search", "fetch", "answer"],
   signals: ["collect"],
   linkedin: [

@@ -11,6 +11,7 @@ import type {
   Person,
   Thread,
 } from "../../db/schema/index.js";
+import type { EmailCheckVerdict } from "../../providers/types.js";
 import type { PlanEmailSendResult } from "../email/plan.js";
 import type { Blocker, BlockerFacts } from "./blockers.js";
 import type { EligibilityLoader, PendingApproval } from "./eligibility-loader.js";
@@ -72,6 +73,22 @@ export interface GateBlocker extends Blocker {
 /** "send": the sender acting now (stops at the first blocker); "view": read-only, every blocker. */
 export type GateMode = "send" | "view";
 
+/**
+ * The cold email check's answer for one send (email/cold-email-check.ts): the address is
+ * clear, a verdict holds the email (skipped, with the provider's words and receipt), or the
+ * check could not run and the email waits until `retry_at`.
+ */
+export type ColdEmailCheckOutcome =
+  | { kind: "clear" }
+  | {
+      kind: "held";
+      verdict: Exclude<EmailCheckVerdict, "ok_to_email">;
+      reason: string | null;
+      next_step: string | null;
+      receipt_id: string | null;
+    }
+  | { kind: "unavailable"; message: string; hint: string | null; retry_at: Date };
+
 /** Work only the sender does, handed in by the send job (the view never calls it). */
 export interface GateHooks {
   /**
@@ -79,6 +96,17 @@ export interface GateHooks {
    * verifier credits and stores the result). Returns the codes the result blocks the send with.
    */
   reverify?: (input: { person: Person; recipient: string }) => Promise<string[]>;
+  /**
+   * Email: asks the compliance provider whether a cold email may go to the address, right
+   * before the first email to the person (it uses the provider's allowance and stores the
+   * verdict on the person). Null when nothing is to be checked (off, a follow-up, a sandbox).
+   */
+  coldEmailCheck?: (input: {
+    person: Person;
+    company: Company | null;
+    recipient: string;
+    message: Message;
+  }) => Promise<ColdEmailCheckOutcome | null>;
 }
 
 /** Everything one evaluation knows; channel checks fill in the sender they settled on. */

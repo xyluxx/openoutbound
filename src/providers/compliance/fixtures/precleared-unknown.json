@@ -1,0 +1,23 @@
+{
+  "verdict": "unknown",
+  "confidence": 0.3,
+  "reasons": [
+    {
+      "note": "Could not tell whether the business is a company or a sole trader: nothing at Companies House matches this domain or name."
+    }
+  ],
+  "next_step": "Add the company's registered name or its company number and check again.",
+  "footer_text": null,
+  "facts": {
+    "recipient_country": "GB"
+  },
+  "receipt": {
+    "id": "rcpt_01k6a3v0q8x3m2n4p5r6s7t8un",
+    "issued_at": "2026-09-19T12:00:00Z"
+  },
+  "usage": {
+    "allowance": "keyless",
+    "used_today": 3,
+    "limit_today": 10
+  }
+}

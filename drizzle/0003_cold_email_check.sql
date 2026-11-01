@@ -1,0 +1,1 @@
+ALTER TABLE "people" ADD COLUMN "email_clearance" jsonb;

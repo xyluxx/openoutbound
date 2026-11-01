@@ -4,6 +4,10 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Added
+
+- **Cold email check.** Right before the first email to a person, the engine asks a compliance provider whether a cold email may go to the address (a new `compliance` slot; Precleared built in, on by default, keyless allowance). Only `ok_to_email` goes out; `consent_needed`, `blocked` and `unknown` skip the email with the provider's reason, next step and receipt, kept on the person (`email_clearance`), and a check that cannot run holds the email with a `sending_blocked` problem. Settings `compliance.cold_email_check` (`mode`, `sender_country`, `provider`) and `PRECLEARED_API_KEY` ([Cold email check](docs/guides/cold-email-check.md)).
+
 ## [0.1.0] - 2026-10-01
 
 First public release. What 0.1 does not do yet is listed in the [roadmap](docs/roadmap.md).
